@@ -295,7 +295,7 @@
                 @endif
                 @foreach($files as $file)
                 <div class="col-md-3" style="padding:10px;">
-                    <a href="{{ asset('storage/') }}/{{ $file->route }}" target="_new"><img src="{{ asset('storage/') }}/{{ $file->route }}" width="120" height="120"></a>
+                    <a href="{{ asset('../vp/public/storage/') }}/{{ $file->route }}" target="_new"><img src="{{ asset('../vp/public/storage/') }}/{{ $file->route }}" width="120" height="120"></a>
                     <br>
                     Subido por:
                     <br>
