@@ -15,7 +15,7 @@ class MensajeController extends Controller
      */
     public function index()
     {
-        $mensajes = Mensaje::where('receptor_id',Auth::user()->id)->orderBy('id', 'DESC')->paginate(15);
+        $mensajes = Mensaje::where('receptor_id',Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(15);
         return view('mensaje.index_mensaje',['mensajes' => $mensajes]);
     }
 
