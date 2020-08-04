@@ -309,7 +309,7 @@
             </div>
         </div>
     </div>
-
+    <!--
     <div class="row shadow p-3 mb-5 bg-white rounded">
         <div class="container">
             <div class="row">
@@ -334,6 +334,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row shadow p-3 mb-5 bg-white rounded">
         <div class="container">
             <div class="row">
@@ -381,6 +382,7 @@
             </div>
         </div>
     </div>
+    -->
 </div>
 @endsection
 @include('services.comment_box')
