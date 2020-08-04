@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 $.each(servicios,function(index,servicio){
                     switch(servicio.status_service_id)
                     {
-                        case 1: color_item = '#566573'; break
-                        case 2: color_item = '#F39C12'; break
-                        case 3: color_item = '#27AE60'; break
-                        case 4: color_item = '#2E86C1 '; break
-                        case 5: color_item = '#C0392B'; break
+                        case '1': color_item = '#566573'; break
+                        case '2': color_item = '#F39C12'; break
+                        case '3': color_item = '#27AE60'; break
+                        case '4': color_item = '#2E86C1 '; break
+                        case '5': color_item = '#C0392B'; break
                     }
                     array_servicios.push({
                         title : servicio.service_report,
@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 });
                 var calendar = new Calendar(calendarEl, {
+                    themeSystem: 'bootstrap',
                     dateClick: function(info) {},
                     events: array_servicios,
                     eventClick : function(info) 
