@@ -17043,3 +17043,8 @@ readers do not read off random characters that represent icons */
   border-radius: 4px;
 }
 
+#calendar {
+  max-width: 100%;
+  max-height: 55%;
+}
+

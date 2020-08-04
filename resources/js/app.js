@@ -1,8 +1,79 @@
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
+document.addEventListener('DOMContentLoaded', function() {
+    if($('#calendar').length > 0)
+    { 
+        var ruta_ajax_servicios = $("#txt_index_ajax").val();
+        $.ajax({
+            url: ruta_ajax_servicios,
+            data:{
+                
+            },
+            success: function(servicios) {
+                var calendarEl = document.getElementById('calendar');
+                var array_servicios = [];
+                var color_item = '';
+                $.each(servicios,function(index,servicio){
+                    switch(servicio.status_service_id)
+                    {
+                        case 1: color_item = '#566573'; break
+                        case 2: color_item = '#F39C12'; break
+                        case 3: color_item = '#27AE60'; break
+                        case 4: color_item = '#2E86C1 '; break
+                        case 5: color_item = '#C0392B'; break
+                    }
+                    array_servicios.push({
+                        title : servicio.service_report,
+                        start : servicio.schedule,
+                        url : $("#txt_show_service_calendar").val()+'/'+servicio.id,
+                        color: color_item
+                    });
+
+                });
+                var calendar = new Calendar(calendarEl, {
+                    dateClick: function(info) {},
+                    events: array_servicios,
+                    eventClick : function(info) 
+                    {},
+                    headerToolbar: {
+                        left: 'prev,today,next',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek'
+                    },
+                    views: {
+                        dayGrid: {},
+                        timeGrid: {},
+                        week: {},
+                        day: {}
+                    },
+                    plugins: [ dayGridPlugin,timeGridPlugin,interactionPlugin ]
+                });
+                calendar.setOption('locale', 'es');
+                calendar.render();
+
+                
+            },
+            error: function() {
+                console.log("No se ha podido obtener la información");
+            }
+        });
+
+
+        
+    }
+});
+
 const { isEmpty } = require('lodash');
 
 require('./bootstrap');
 
 $(document).ready(function(){
+
+    
+    
     getSepomex($("#txt_cp_sepomex").val());
     getCustomerAddress($('#txt_customer_adress_id').val());
     $("#contenedor_mensajes").animate({ scrollTop: $('#contenedor_mensajes').prop("scrollHeight")},0);

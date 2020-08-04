@@ -24,6 +24,10 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.1",
+        "@fullcalendar/core": "^5.2.1",
+        "@fullcalendar/daygrid": "^5.2.0",
+        "@fullcalendar/interaction": "^5.2.0",
+        "@fullcalendar/timegrid": "^5.2.0",
         "jquery-datetimepicker": "^2.5.21",
         "laravel-mix-icomoon": "0.0.2"
     }

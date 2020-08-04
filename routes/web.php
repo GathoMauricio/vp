@@ -10,7 +10,7 @@ Route::middleware(['check_login'])->group(function () {
 
     //Retorna la vista principal del sistema en este caso los servicios
     Route::get('dashboard','ServiceController@index')->name('dashboard');
-
+    Route::get('index_ajax','ServiceController@indexAjax')->name('index_ajax');
     #RUTAS PARA USUARIOS
     //Retorna la lista de usuarios del sistema
     Route::get('index_user', 'UserController@index')->name('index_user');
@@ -78,7 +78,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::post('store_service', 'ServiceController@store')->name('store_service');
 
     //Retorna un servicio especifico
-    Route::get('show_service/{id}', 'ServiceController@show')->name('show_service');
+    Route::get('show_service/{id?}', 'ServiceController@show')->name('show_service');
 
     //Retorna el formulario para editar un servicio
     Route::get('edit_service/{id}', 'ServiceController@edit')->name('edit_service');
@@ -160,3 +160,5 @@ Route::middleware(['check_login'])->group(function () {
     //Inserta bitacora ajax
     Route::post('store_comment','BitacoraController@store')->name('store_comment');
 });
+
+//Route::get('calendario', function(){ return view('calendario'); })->name('calendario');
