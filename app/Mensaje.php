@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Purifier;
+use Config;
 
 class Mensaje extends Model
 {
@@ -55,4 +57,9 @@ class Mensaje extends Model
         )
         ->withDefault();
     }
+    /*
+    public function setMensajeAttribute($value) {
+        $this->attributes['mensaje'] = Purifier::clean( $value );
+    }
+    */
 }

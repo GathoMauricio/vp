@@ -65,7 +65,7 @@
                         @if($mensaje->leido == 'NO')
                         <a style="background-color:#85C1E9;" class="dropdown-item" href="{{ route('open_message',[$mensaje->id,$mensaje->service_id]) }}">
                             <span class="icon {{$mensaje->icon}}" style="color:{{$mensaje->color}}"></span>
-                            <label class="font-weight-bold">{{$mensaje->emisor['name']}} {{$mensaje->emisor['last_name1']}}</label> {{ $mensaje->mensaje }}
+                            <label class="font-weight-bold">{{$mensaje->emisor['name']}} {{$mensaje->emisor['last_name1']}}</label> {!! $mensaje->mensaje !!}
                             <br>
                             <span class="float-right" style="color:white;">{{ date_format(new \DateTime($mensaje->created_at), 'd-m-Y g:i A') }}</span>
                             <br>
@@ -73,7 +73,7 @@
                         @else
                         <a class="dropdown-item" href="{{ route('open_message',[$mensaje->id,$mensaje->service_id]) }}">
                             <span class="icon {{$mensaje->icon}}" style="color:{{$mensaje->color}}"></span>
-                            <label class="font-weight-bold">{{$mensaje->emisor['name']}} {{$mensaje->emisor['last_name1']}}</label> {{ $mensaje->mensaje }}
+                            <label class="font-weight-bold">{{$mensaje->emisor['name']}} {{$mensaje->emisor['last_name1']}}</label> {!! $mensaje->mensaje !!}
                             <br>
                             <span class="float-right" style="color:#2E86C1;">{{ date_format(new \DateTime($mensaje->created_at), 'd-m-Y g:i A') }}</span>
                             <br>

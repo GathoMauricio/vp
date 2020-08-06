@@ -148,6 +148,27 @@ $(document).ready(function(){
             });
         }
     });
+    //Agregar usuario final ajax
+    $("#frm_create_final_user_ajax").submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: $("#frm_create_final_user_ajax").prop('action'),
+            method: "POST",
+            data:$("#frm_create_final_user_ajax").serialize(),
+            success: function(respuesta) {
+                //console.log(respuesta);
+                var combo = $("#cbo_usuario_final");
+                combo.html("--Seleccione una opción--");
+                combo.append(respuesta);
+                swal('Listo','Usuario final agregado','success');
+                $("#create_final_user_modal").modal('hide');
+            },
+            error: function(e) {
+                //console.log(JSON.stringify(e));
+                swal('Atención', 'rellene los campos obligatorios eingrese un email válido','warning');
+            }
+        });
+    });
 });
 
 window.cargarUsuarios = function(value)
@@ -171,6 +192,13 @@ window.cargarUsuarios = function(value)
 }
 window.cargarUsuariosFinales = function(value)
 {
+    if(value.length > 0){
+        $("#customer_id_create_usuario_final_axax").val(value);
+        $("#link_usuario_final_ajax").css('display', 'block');
+    }else{
+        $("#customer_id_create_usuario_final_axax").val('');
+        $("#link_usuario_final_ajax").css('display', 'none');
+    }
     var ruta = $("#ruta_cargar_usuario_final").val();
     var combo = $("#cbo_usuario_final");
     combo.html("--Seleccione una opción--");
@@ -225,23 +253,25 @@ window.getSepomex = function(value) {
 }
 window.getCustomerAddress = function(customer_id){
     var ruta = $("#ruta_get_customer_address").val();
-    $.ajax({
-        url: ruta,
-        data:{
-            'customer_id':customer_id
-        },
-        success: function(respuesta) {
-            $("#txt_cp_sepomex").prop('value', respuesta.cp);
-            getSepomex($("#txt_cp_sepomex").val());
-            setTimeout(function(){ $("#cbo_asentamiento_sepomex").val(respuesta.asentamiento); },300)
-            $("#txt_calle_numero").val(respuesta.calle_numero);
-            $("#txt_piso").val(respuesta.piso);
-            $("#txt_interior").val(respuesta.interior);
-        },
-        error: function() {
-            console.log("No se ha podido obtener la información");
-        }
-    });
+    if(customer_id.length > 0){
+        $.ajax({
+            url: ruta,
+            data:{
+                'customer_id':customer_id
+            },
+            success: function(respuesta) {
+                $("#txt_cp_sepomex").prop('value', respuesta.cp);
+                getSepomex($("#txt_cp_sepomex").val());
+                setTimeout(function(){ $("#cbo_asentamiento_sepomex").val(respuesta.asentamiento); },300)
+                $("#txt_calle_numero").val(respuesta.calle_numero);
+                $("#txt_piso").val(respuesta.piso);
+                $("#txt_interior").val(respuesta.interior);
+            },
+            error: function() {
+                console.log("No se ha podido obtener la información");
+            }
+        });
+    }
 }
 var comment_box = false;
 window.switchCommentBox = function(){

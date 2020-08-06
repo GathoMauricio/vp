@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="customer_id" class="font-weight-bold">Cliente</label>
-                            <select onchange="cargarUsuariosFinales(this.value)" name="customer_id"
+                            <select onchange="cargarUsuariosFinales(this.value);getCustomerAddress(this.value);" name="customer_id"
                                 class="form-control">
                                 <option value>--Seleccione una opción--</option>
                                 @foreach($customers as $customer)
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <input type="hidden" id="ruta_cargar_usuario_final"
                                 value="{{ route('cargar_usuario_final') }}">
-                            <label for="usuario_final" class="font-weight-bold">Usuario final</label>
+                            <label for="usuario_final" class="font-weight-bold" style="width:100%">Usuario final <a id="link_usuario_final_ajax" onclick="$('#create_final_user_modal').modal();" href="#" class="float-right" style="display:none"><span class="icon icon-plus"></span> Crear usuario final</a></label>
                             <select id="cbo_usuario_final" name="final_user_id" class="form-control">
                                 <option value>--Seleccione una opción--</option>
                             </select>
@@ -123,4 +123,5 @@
 
 </div>
 </div>
+@include('final_user.create_final_user_modal')
 @endsection

@@ -8,6 +8,7 @@ use App\Comment;
 use App\Mensaje;
 use Redirect;
 use Auth;
+use Purifier;
 use App\Http\Controllers\NotificationController;
 
 class CommentController extends Controller
@@ -52,7 +53,7 @@ class CommentController extends Controller
                 'service_id' => $service->id,
                 'emisor_id' => $service->technical_id,
                 'receptor_id' => $service->manager_id,
-                'mensaje' => 'Ha comentado el servicio de '.$service->customer['code'].' con folio: '.$service->service_report,
+                'mensaje' => Purifier::clean(Input::get('Ha comentado el servicio de <span style="font-weight: bold;">'.$service->customer['code'].'</span> con folio: '.$service->service_report)),
                 'icon' => 'icon-bubbles4',
                 'color' => '#2ECC71'
             ]);
@@ -64,7 +65,7 @@ class CommentController extends Controller
                 'mensaje_push',
                 [
                     'emisor' => $service->technical['name'].' '.$service->technical['last_name1'],
-                    'mensaje' => 'Ha comentado el servicio de '.$service->customer['code'].' con folio: '.$service->service_report,
+                    'mensaje' => Purifier::clean(Input::get('Ha comentado el servicio de <span style="font-weight: bold;">'.$service->customer['code'].'</span> con folio: '.$service->service_report)),
                     'timestamp' => date_format(new \DateTime($comment->created_at), 'd-m-Y g:i A') 
                 ]
             );
@@ -78,7 +79,7 @@ class CommentController extends Controller
                 'service_id' => $service->id,
                 'emisor_id' => $service->manager_id,
                 'receptor_id' => $service->technical_id,
-                'mensaje' => 'Ha comentado el servicio de '.$service->customer['code'].' con folio: '.$service->service_report,
+                'mensaje' => Purifier::clean(Input::get('Ha comentado el servicio de <span style="font-weight: bold;">'.$service->customer['code'].'</span> con folio: '.$service->service_report)),
                 'icon' => 'icon-bubbles4',
                 'color' => '#2ECC71'
             ]);
@@ -90,7 +91,7 @@ class CommentController extends Controller
                 'mensaje_push',
                 [
                     'emisor' => $service->manager['name'].' '.$service->manager['last_name1'],
-                    'mensaje' => 'Ha comentado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                    'mensaje' => Purifier::clean(Input::get('Ha comentado el servicio de <span style="font-weight: bold;">'.$service->customer['code'].'</span> con folio '.$service->service_report)),
                     'timestamp' => date_format(new \DateTime($comment->created_at), 'd-m-Y g:i A')
                 ]
             );

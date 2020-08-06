@@ -5,6 +5,7 @@ use App\Customer;
 use App\FinalUser;
 use App\Http\Requests\FinalUserRequest;
 use Illuminate\Http\Request;
+use DB;
 
 class FinalUserController extends Controller
 {
@@ -42,6 +43,18 @@ class FinalUserController extends Controller
         {
             return redirect('show_final_user/'.$finalUser->id)->with('mensaje','El usuario se creó con éxito.');
         }
+    }
+    public function storeAjax(FinalUserRequest $request)
+    {
+        $finalUser = FinalUser::create($request->all());
+        $finalUsers = DB::select("
+            SELECT * FROM final_users WHERE customer_id = " . $request->customer_id . "
+            ");
+            $html = "<option value>--Seleccione una opción--</option>";
+            for ($i = 0; $i < count($finalUsers); $i++) {
+                $html .= "<option value='" . $finalUsers[$i]->id . "'>" . $finalUsers[$i]->name . " " . $finalUsers[$i]->last_name1 . " " . $finalUsers[$i]->last_name2 . "</option>";
+            }
+            return $html;
     }
 
     /**

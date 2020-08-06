@@ -111,6 +111,9 @@ Route::middleware(['check_login'])->group(function () {
     //Inserta un nuevo usuario final
     Route::post('store_final_user','FinalUserController@store')->name('store_final_user');
 
+    //Inserta un nuevo usuario final ajax
+    Route::post('store_final_user_ajax','FinalUserController@storeAjax')->name('store_final_user_ajax');
+    
     //Muesra un usuario final en particular
     Route::get('show_final_user/{id}','FinalUserController@show')->name('show_final_user');
 
