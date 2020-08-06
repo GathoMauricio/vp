@@ -253,7 +253,6 @@ window.getSepomex = function(value) {
 }
 window.getCustomerAddress = function(customer_id){
     var ruta = $("#ruta_get_customer_address").val();
-    if(customer_id.length > 0){
         $.ajax({
             url: ruta,
             data:{
@@ -271,7 +270,6 @@ window.getCustomerAddress = function(customer_id){
                 console.log("No se ha podido obtener la información");
             }
         });
-    }
 }
 var comment_box = false;
 window.switchCommentBox = function(){

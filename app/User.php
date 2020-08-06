@@ -56,7 +56,40 @@ class User extends Authenticatable
         )
         ->withDefault();
     }
-
+    public function setNameAttribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['name'] = $resultado;
+    }
+    public function setLastName1Attribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['last_name1'] = $resultado;
+    }
+    public function setLastName2Attribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['last_name2'] = $resultado;
+    }
+    public function setEmailAttribute($value)
+	{
+		$this->attributes['email'] = strtolower($value);
+    }
     public function setPasswordAttribute($value)
 	{
 		$this->attributes['password'] = bcrypt($value);

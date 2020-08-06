@@ -164,4 +164,14 @@ Route::middleware(['check_login'])->group(function () {
     Route::post('store_comment','BitacoraController@store')->name('store_comment');
 });
 
-//Route::get('calendario', function(){ return view('calendario'); })->name('calendario');
+Route::get('test',function(){
+
+    $fragmentos = explode(' ',"osCaR mAurIcio");
+    $resultado ="";
+    for($i=0;$i<count($fragmentos);$i++)
+    {
+        $resultado .= Str::studly(strtolower($fragmentos[$i]))." ";
+    }
+    echo $resultado;
+    
+})->name('test');

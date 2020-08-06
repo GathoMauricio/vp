@@ -42,4 +42,35 @@ class FinalUser extends Model
         )
         ->withDefault();
     }
+    public function setNameAttribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['name'] = $resultado;
+    }
+    public function setLastName1Attribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['last_name1'] = $resultado;
+    }
+    public function setLastName2Attribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['last_name2'] = $resultado;
+    }
+    
 }

@@ -42,4 +42,42 @@ class Customer extends Model
         )
         ->withDefault();
     }
+    public function setResponsableNameAttribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['responsable_name'] = $resultado;
+    }
+    public function setResponsableLastName1Attribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['responsable_last_name1'] = $resultado;
+    }
+    public function setResponsableLastName2Attribute($value)
+    {
+        $fragmentos = explode(' ',$value);
+        $resultado ="";
+        for($i=0;$i<count($fragmentos);$i++)
+        {
+            $resultado .= \Str::studly(strtolower($fragmentos[$i]))." ";
+        }
+        $this->attributes['responsable_last_name2'] = $resultado;
+    }
+    public function setEmailAttribute($value)
+	{
+		$this->attributes['email'] = strtolower($value);
+    }
+    public function setRfcAttribute($value)
+	{
+		$this->attributes['rfc'] = strtoupper($value);
+    }
 }
