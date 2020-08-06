@@ -68,7 +68,7 @@
                             @if($customer->customer_type_id > 2 )
                             <label for="" class="font-weight-bold">Descripción *</label>
                             @else
-                            <label for="" class="font-weight-bold">Area</label>
+                            <label for="" class="font-weight-bold">Area *</label>
                             @endif
                             <input name="area_descripcion" value="{{ old('area_descripcion') }}" type="text"
                                 class="form-control">
