@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login','ApiUserController@login')->name('login');
 //Obtiene los servicios de cada usuario dependiendo de su rol
 Route::middleware('auth:api')->get('/index_service','ApiServiceController@index')->name('index_service');
+//Obtiene todos los datos de un servicio en particular
+Route::middleware('auth:api')->get('/show_service','ApiServiceController@show')->name('show_service');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

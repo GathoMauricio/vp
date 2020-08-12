@@ -54,9 +54,17 @@ class ApiServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $service = Service::where('id',$request->service_id)
+        ->with('status')
+        ->with('service_type')
+        ->with('manager')
+        ->with('technical')
+        ->with('usuario_Final')
+        ->with('customer')
+        ->first();
+        return $service;
     }
 
     /**
