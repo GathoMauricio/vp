@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 //Obtener token a partir del login (email y contraseña)
 Route::get('/login','ApiUserController@login')->name('login');
+//Obtiene los servicios de cada usuario dependiendo de su rol
+Route::middleware('auth:api')->get('/index_service','ApiServiceController@index')->name('index_service');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
