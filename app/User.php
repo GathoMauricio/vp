@@ -29,6 +29,7 @@ class User extends Authenticatable
         'calle_numero',
         'image',
         'password',
+        'api_token',
         'created_at',
         'updated_at'
     ];
