@@ -61,7 +61,7 @@ class ApiFirmaController extends Controller
     {
         $service = Service::findOrFail($request->service_id);
         //$path = storage_path('/').$service->firm;
-        return env('APP_URL').'/vp/public/storage'.'/'. $service->firm;
+        return env('APP_URL').'/public/storage'.'/'. $service->firm;
         //Storage::disk('local')->path($service->firm);
         //return $path;
         
