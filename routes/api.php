@@ -19,6 +19,10 @@ Route::get('/login','ApiUserController@login')->name('login');
 Route::middleware('auth:api')->get('/index_service','ApiServiceController@index')->name('index_service');
 //Obtiene todos los datos de un servicio en particular
 Route::middleware('auth:api')->get('/show_service','ApiServiceController@show')->name('show_service');
+//Almacenar firma del usuario atendido
+Route::middleware('auth:api')->post('/store_firma','ApiFirmaController@store')->name('store_firma');
+//Obtener firma del usuario_final
+Route::middleware('auth:api')->get('/show_firma','ApiFirmaController@show')->name('show_firma');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

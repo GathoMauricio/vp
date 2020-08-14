@@ -26,6 +26,7 @@ class Service extends Model
         'solution',
         'init_service',
         'end_service',
+        'firm',
         'created_at',
         'updated_at'
     ];
