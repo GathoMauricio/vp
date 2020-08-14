@@ -138,6 +138,15 @@
                 </div>
             </div>
             <div class="row">
+                @if(!empty($service['firm']))
+                <div class="col-md-4">
+                    <label for="" class="font-weight-bold">Firma usuario final</label>
+                    <br>
+                    <img src="{{ env('APP_URL').'/public/storage'.'/'.$service['firm'] }}" wicth="120" height="120">
+                </div>
+                @endif
+            </div>
+            <div class="row">
                 @if(!empty($service->init_service))
                 <div class="col-md-4">
                     Servicio iniciado: {{ date_format(new \DateTime($service->init_service), 'd-m-Y g:i A') }}
