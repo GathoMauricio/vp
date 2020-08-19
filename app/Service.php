@@ -21,6 +21,7 @@ class Service extends Model
         'technical_id',
         'customer_id',
         'description',
+        'priority',
         'observations',
         'schedule',
         'solution',

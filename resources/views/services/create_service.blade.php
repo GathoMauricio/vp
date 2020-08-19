@@ -99,6 +99,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label for="priority" class="font-weight-bold">Prioridad</label>
+                            <select name="priority" class="form-control">
+                                <option value="Normal">Normal</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Baja">Baja</option>
+                            </select>
+                            @if($errors->has('priority')) <small
+                                style="color:red">{{ $errors->first('priority') }}</small>@endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
                             <label for="observations" class="font-weight-bold">Observaciones</label>
                             <textarea name="observations" class="form-control"></textarea>
                             @if($errors->has('descriptobservationsion')) <small

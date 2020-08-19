@@ -20,7 +20,19 @@
             <div class="row">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Detalles del servicio {{ $service->service_report }}</h4>
+                        <h4>
+                            Detalles del servicio {{ $service->service_report }} - 
+                            Prioridad 
+                            @if($service->priority == 'Alta')
+                            <span style="color:#2ECC71;" class="font-weight-bold">{{ $service->priority }}</span>
+                            @endif
+                            @if($service->priority == 'Normal')
+                            <span style="color:#2E86C1;" class="font-weight-bold">{{ $service->priority }}</span>
+                            @endif
+                            @if($service->priority == 'Baja')
+                            <span style="color:#F1C40F;" class="font-weight-bold">{{ $service->priority }}</span>
+                            @endif
+                        </h4> 
                     </div>
                 </div>
                 <div class="col-md-12 py-4">

@@ -13,16 +13,8 @@
         {{ $desc }}
     </div>
     -->
-    <input type="hidden" id="txt_show_service_calendar" value="{{ route('show_service') }}">
-    <input type="hidden" id="txt_index_ajax" value="{{  route('index_ajax') }}">
-    <div class="row shadow p-3  bg-white rounded">
-        <div class="col"></div>
-        <div class="col-12">
-            <div id="calendar"></div>
-        </div>
-        <div class="col"></div>
-    </div>
-<!--
+    
+
     <div class="row shadow p-3  bg-white rounded">
         {{ $services->links() }}
         <table class="table table-dark">
@@ -35,9 +27,12 @@
                 <th>Cliente</th>
                 <th>Usuario final</th>
                 <th>Descripción</th>
+                <!--
                 <th>Comentarios</th>
                 <th>Archivos</th>
+                -->
                 <th>Estatus</th>
+                <th>Prioridad</th>
                 <th>
                 Options
                 </th>
@@ -61,8 +56,10 @@
                     <td>{{ $service->usuario_Final['name'] }} {{ $service->usuario_Final['last_name1'] }}
                         {{ $service->usuario_Final['last_name2'] }}</td>
                     <td>{{ $service->description }} </td>
-                <td>{{ count(App\Comment::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-bubble"></span></td>
-                <td>{{ count(App\File::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-attachment"></span></td>
+                    <!--
+                    <td>{{ count(App\Comment::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-bubble"></span></td>
+                    <td>{{ count(App\File::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-attachment"></span></td>
+                    -->    
                     <td>
                         @if($service->status['status_service'] == 'Pendiente')
                         <span class="bg-secondary"
@@ -86,6 +83,20 @@
                         @endif
                     </td>
                     <td>
+                        @if($service->priority == 'Alta')
+                        <span
+                            style="padding:5px;border-radius:5px;color:#2ECC71;">{{ $service->priority }}</span>
+                        @endif
+                        @if($service->priority == 'Normal')
+                        <span
+                            style="padding:5px;border-radius:5px;color:#2E86C1;">{{ $service->priority }}</span>
+                        @endif
+                        @if($service->priority == 'Baja')
+                        <span
+                            style="padding:5px;border-radius:5px;color:#F1C40F">{{ $service->priority }}</span>
+                        @endif
+                    </td>
+                    <td>
                         <a href="{{ route('show_service',$service->id) }}" class="btn btn-primary"><span
                                 class="icon icon-eye"></span></a>
                     </td>
@@ -93,6 +104,17 @@
                 @endforeach
         </table>
     </div>
--->
+
+
+    <input type="hidden" id="txt_show_service_calendar" value="{{ route('show_service') }}">
+    <input type="hidden" id="txt_index_ajax" value="{{  route('index_ajax') }}">
+    <div class="row shadow p-3  bg-white rounded">
+        <div class="col"></div>
+        <div class="col-12">
+            <div id="calendar"></div>
+        </div>
+        <div class="col"></div>
+    </div>
+
 </div>
 @endsection
