@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Service;
+use Storage;
+use App\File;
 
 use Illuminate\Http\Request;
 
@@ -99,5 +101,25 @@ class ApiServiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function storeEvidence(Request $request)
+    {
+        //obtenemos el campo file definido en el formulario
+        $file = $request->file('imagen');
+        //obtenemos el nombre del archivo
+        $nombre = $request->service_id."_".$file->getClientOriginalName();
+        $myfile = File::create(
+            [
+                'service_id' => $request->service_id,
+                'route' => $nombre,
+                'description' => "Descripcion de API"
+            ]
+        );
+        if($myfile)
+        {
+            //indicamos que queremos guardar un nuevo archivo en el disco local
+            \Storage::disk('local')->put($nombre,\File::get($file));
+        }
     }
 }
