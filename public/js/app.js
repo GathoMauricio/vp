@@ -54069,6 +54069,14 @@ window.switchCommentBox = function () {
   }
 };
 
+window.openCalendar = function () {
+  $("#calendar_container").css('display', 'block');
+};
+
+window.closeCalendar = function () {
+  $("#calendar_container").css('display', 'none');
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

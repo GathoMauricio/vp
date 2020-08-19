@@ -73,9 +73,6 @@ const { isEmpty } = require('lodash');
 require('./bootstrap');
 
 $(document).ready(function(){
-
-    
-    
     getSepomex($("#txt_cp_sepomex").val());
     getCustomerAddress($('#txt_customer_adress_id').val());
     $("#contenedor_mensajes").animate({ scrollTop: $('#contenedor_mensajes').prop("scrollHeight")},0);
@@ -281,4 +278,11 @@ window.switchCommentBox = function(){
         $(".contenedor_box").css('height','340');
         comment_box=true;
     }
+}
+
+window.openCalendar = function(){
+    $("#calendar_container").css('display','block');
+}
+window.closeCalendar = function(){
+    $("#calendar_container").css('display','none');
 }

@@ -8,13 +8,9 @@
     <div class="row shadow p-3  bg-white rounded">
         <h4>Lista de servicios</h4>
     </div>
-    <!--
     <div class="row shadow p-3  bg-white rounded">
         {{ $desc }}
     </div>
-    -->
-    
-
     <div class="row shadow p-3  bg-white rounded">
         {{ $services->links() }}
         <table class="table table-dark">
@@ -34,7 +30,7 @@
                 <th>Estatus</th>
                 <th>Prioridad</th>
                 <th>
-                Options
+                    Options
                 </th>
             </tr>
             @if(count($services) <= 0) <tr>
@@ -59,7 +55,7 @@
                     <!--
                     <td>{{ count(App\Comment::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-bubble"></span></td>
                     <td>{{ count(App\File::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-attachment"></span></td>
-                    -->    
+                    -->
                     <td>
                         @if($service->status['status_service'] == 'Pendiente')
                         <span class="bg-secondary"
@@ -84,16 +80,13 @@
                     </td>
                     <td>
                         @if($service->priority == 'Alta')
-                        <span
-                            style="padding:5px;border-radius:5px;color:#2ECC71;">{{ $service->priority }}</span>
+                        <span style="padding:5px;border-radius:5px;color:#2ECC71;">{{ $service->priority }}</span>
                         @endif
                         @if($service->priority == 'Normal')
-                        <span
-                            style="padding:5px;border-radius:5px;color:#2E86C1;">{{ $service->priority }}</span>
+                        <span style="padding:5px;border-radius:5px;color:#2E86C1;">{{ $service->priority }}</span>
                         @endif
                         @if($service->priority == 'Baja')
-                        <span
-                            style="padding:5px;border-radius:5px;color:#F1C40F">{{ $service->priority }}</span>
+                        <span style="padding:5px;border-radius:5px;color:#F1C40F">{{ $service->priority }}</span>
                         @endif
                     </td>
                     <td>
@@ -105,7 +98,12 @@
         </table>
     </div>
 
-
+</div>
+<div id="calendar_container">
+    <br><br>
+    <div style="width:100%;padding:10px;text-align:right;">
+        <span onclick="closeCalendar();" class="icon icon-cross" style="cursor:pointer;"></span>
+    </div>
     <input type="hidden" id="txt_show_service_calendar" value="{{ route('show_service') }}">
     <input type="hidden" id="txt_index_ajax" value="{{  route('index_ajax') }}">
     <div class="row shadow p-3  bg-white rounded">
@@ -115,6 +113,8 @@
         </div>
         <div class="col"></div>
     </div>
-
+</div>
+<div id="container_clendar_button">
+    <span onclick="openCalendar();" id="calendar_button" class="icon icon-calendar"></span>
 </div>
 @endsection
