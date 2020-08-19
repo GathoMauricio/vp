@@ -266,6 +266,24 @@ class ServiceController extends Controller
             case 4: //finalizar servicio
                 return view('services.success_service', ['service_id' => $id, 'status' => $status]);
                 break;
+            case 6:
+                $service = Service::findOrFail($id);
+                $service->status_service_id = $status;
+                $service->save();
+                return redirect('show_service/' . $id)->with('mensaje', 'El servicio ha pasado a pendiente por pagar.');
+                break;
+            case 7:
+                $service = Service::findOrFail($id);
+                $service->status_service_id = $status;
+                $service->save();
+                return redirect('show_service/' . $id)->with('mensaje', 'El servicio se encuentra en proceso de pago.');
+                break;
+            case 8:
+                $service = Service::findOrFail($id);
+                $service->status_service_id = $status;
+                $service->save();
+                return redirect('show_service/' . $id)->with('mensaje', 'El servicio se ha sido cerado.');
+                break;
         }
     }
     public function updateStatusService(Request $request)

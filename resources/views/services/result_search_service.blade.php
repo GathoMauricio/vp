@@ -30,7 +30,7 @@
                 </th>
             </tr>
             @if(count($services) <= 0) <tr>
-                <td colspan="8">
+                <td colspan="11">
                     <center>--No se encontraron registros--</center>
                 </td>
                 </tr>

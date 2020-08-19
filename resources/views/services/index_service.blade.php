@@ -22,19 +22,19 @@
                 <th>Técnico</th>
                 <th>Cliente</th>
                 <th>Usuario final</th>
+                @if (getRoles()['rol_admin'] || getRoles()['rol_mesa'])
+                <th>Estatus Mesa</th>
+                @else 
                 <th>Descripción</th>
-                <!--
-                <th>Comentarios</th>
-                <th>Archivos</th>
-                -->
-                <th>Estatus</th>
+                @endif
+                <th>Estatus técnico</th>
                 <th>Prioridad</th>
                 <th>
                     Options
                 </th>
             </tr>
             @if(count($services) <= 0) <tr>
-                <td colspan="8">
+                <td colspan="11">
                     <center>--No se encontraron registros--</center>
                 </td>
                 </tr>
@@ -48,14 +48,18 @@
                         {{ $service->manager['last_name2'] }}</td>
                     <td>{{ $service->technical['name'] }} {{ $service->technical['last_name1'] }}
                         {{ $service->technical['last_name2'] }}</td>
-                    <td>{{ $service->customer['name'] }}</td>
+                    <td>{{ $service->customer['code'] }}</td>
                     <td>{{ $service->usuario_Final['name'] }} {{ $service->usuario_Final['last_name1'] }}
                         {{ $service->usuario_Final['last_name2'] }}</td>
+                    @if (getRoles()['rol_admin'] || getRoles()['rol_mesa'])
+                        @if($service->status_service_id <= 3)
+                        <td>Abierto </td>
+                        @else
+                            <td>{{$service->status['status_service']}}</td>
+                        @endif
+                    @else
                     <td>{{ $service->description }} </td>
-                    <!--
-                    <td>{{ count(App\Comment::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-bubble"></span></td>
-                    <td>{{ count(App\File::where('service_id',$service->id)->get()) }}&nbsp;&nbsp;&nbsp;<span class="icon icon-attachment"></span></td>
-                    -->
+                    @endif
                     <td>
                         @if($service->status['status_service'] == 'Pendiente')
                         <span class="bg-secondary"
@@ -65,9 +69,9 @@
                         <span class="bg-warning"
                             style="padding:5px;border-radius:5px;">{{ $service->status['status_service'] }}</span>
                         @endif
-                        @if($service->status['status_service'] == 'Finalizado')
+                        @if($service->status['status_service'] == 'Finalizado' || $service->status_service_id >= 6)
                         <span class="bg-success"
-                            style="padding:5px;border-radius:5px;">{{ $service->status['status_service'] }}</span>
+                            style="padding:5px;border-radius:5px;">Finalizado</span>
                         @endif
                         @if($service->status['status_service'] == 'Re-agendado')
                         <span class="bg-primary"

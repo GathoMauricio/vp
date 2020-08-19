@@ -58,10 +58,29 @@
                     &nbsp;&nbsp;&nbsp;
                     <a href="{{ route('edit_status_service',[$service->id,3]) }}" style="color:red;"><span class="icon icon-bin"></span> Solicitar cancelar</a>
                     @endif
-                    @if($service->status['status_service'] == 'Finalizado')
-                    <span class="bg-success" style="padding:5px;border-radius:5px;">{{ $service->status['status_service'] }}</span>
+                    @if($service->status['status_service'] == 'Finalizado' || $service->status_service_id >= 6)
+                    <span class="bg-success" style="padding:5px;border-radius:5px;">Finalizado</span>
                     @endif
-                    @if($service->status['status_service'] == 'Re-agendado')
+                    @if (getRoles()['rol_admin'] || getRoles()['rol_mesa'])
+                    <br><br>
+                        @if($service->status['status_service'] == 'Finalizado')
+                            <a href="{{ route('edit_status_service',[$service->id,6]) }}" style="color:green;"><span class="icon icon-checkmark"></span> Cambiar a pendiente por pagar (PPP)</a>
+                            &nbsp;&nbsp;&nbsp;
+                        @endif
+                        @if($service->status['status_service'] == 'PPP')
+                            <a href="{{ route('edit_status_service',[$service->id,7]) }}" style="color:green;"><span class="icon icon-checkmark"></span> Cambiar a procesando pago (EP)</a>
+                            &nbsp;&nbsp;&nbsp;
+                        @endif
+                        @if($service->status['status_service'] == 'EP')
+                            <a href="{{ route('edit_status_service',[$service->id,8]) }}" style="color:green;"><span class="icon icon-checkmark"></span> Cambiar a cerrado (CR)</a>
+                            &nbsp;&nbsp;&nbsp;
+                        @endif
+                        @if($service->status['status_service'] == 'CR')
+                            <span class="bg-primary" style="padding:5px;border-radius:5px;">Servicio cerrado ({{ $service->status['status_service'] }})</span>
+                            &nbsp;&nbsp;&nbsp;
+                        @endif
+                    @endif
+                     @if($service->status['status_service'] == 'Re-agendado')
                     <span class="bg-primary" style="padding:5px;border-radius:5px;">{{ $service->status['status_service'] }}</span>
                     @endif
                     @if($service->status['status_service'] == 'Cancelado')
