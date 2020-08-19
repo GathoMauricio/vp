@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="observations" class="font-weight-bold">Observaciones</label>
+                            <label for="observations" class="font-weight-bold">Observaciones <i>(Internas)</i> </label>
                             <textarea name="observations" class="form-control"></textarea>
                             @if($errors->has('descriptobservationsion')) <small
                                 style="color:red">{{ $errors->first('observations') }}</small>@endif
