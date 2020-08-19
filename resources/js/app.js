@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 var array_servicios = [];
                 var color_item = '';
                 $.each(servicios,function(index,servicio){
-                    console.log(JSON.stringify(servicio));
                     switch(servicio.status_service_id)
                     {
                         case '1': color_item = '#566573'; break
