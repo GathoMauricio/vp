@@ -281,6 +281,7 @@ class ServiceController extends Controller
             case 8:
                 $service = Service::findOrFail($id);
                 $service->status_service_id = $status;
+                $service->payment = $request->payment;
                 $service->save();
                 return redirect('show_service/' . $id)->with('mensaje', 'El servicio se ha sido cerado.');
                 break;

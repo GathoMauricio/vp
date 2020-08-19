@@ -72,7 +72,23 @@
                             &nbsp;&nbsp;&nbsp;
                         @endif
                         @if($service->status['status_service'] == 'EP')
-                            <a href="{{ route('edit_status_service',[$service->id,8]) }}" style="color:green;"><span class="icon icon-checkmark"></span> Cambiar a cerrado (CR)</a>
+                        <form action="{{ route('edit_status_service',[$service->id,8]) }}">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="" class="font-weight-bold">Método de pago</label>
+                                        <select name="payment" class="form-control">
+                                            <option value="Transferencia">Transferencia</option>
+                                            <option value="Efectivo">Efectivo</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><button style="color:green;"><span class="icon icon-checkmark"></span> Cambiar a cerrado (CR)</button></td>
+                                </tr>
+                            </table>
+                        </form>
                             &nbsp;&nbsp;&nbsp;
                         @endif
                         @if($service->status['status_service'] == 'CR')
@@ -174,6 +190,13 @@
                     <label for="" class="font-weight-bold">Firma usuario final</label>
                     <br>
                     <img src="{{ env('APP_URL').'/public/storage'.'/'.$service['firm'] }}" wicth="120" height="120">
+                </div>
+                @endif
+                @if (getRoles()['rol_admin'] || getRoles()['rol_mesa'])
+                <div class="col-md-4">
+                    <label for="" class="font-weight-bold">Método de pago</label>
+                    <br>
+                    {{ $service['payment'] }}
                 </div>
                 @endif
             </div>
