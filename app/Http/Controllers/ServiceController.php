@@ -421,30 +421,38 @@ class ServiceController extends Controller
     }
     public function indexAjax()
     {
+        /*
+        $services = Service::where('technical_id', Auth::user()->id)
+        ->get();
+        return $services;
+        */
+        
         if (getRoles()['rol_admin']) {
-            $services = Service::all();
+            $services = Service::with('customer')->get();
             return $services;
-            return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de administrador por lo tanto se muestran todos los servicios existentes.']);
+            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de administrador por lo tanto se muestran todos los servicios existentes.']);
         }
         if (getRoles()['rol_mesa'] && getRoles()['rol_tec']) {
-            $services = Service::whereDate('schedule', Carbon::today())->where('manager_id', Auth::user()->id)
+            $services = Service::where('manager_id', Auth::user()->id)
                 ->orWhere('technical_id', Auth::user()->id)
+                ->with('customer')
                 ->get();
             return $services;
-            return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta tanto con rol de mesa de ayuda como de técnico se muestran tanto los servicios levantados como asignanos a este usuario.']);
+            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta tanto con rol de mesa de ayuda como de técnico se muestran tanto los servicios levantados como asignanos a este usuario.']);
         }
         if (getRoles()['rol_mesa']) {
-            $services = Service::whereDate('schedule', Carbon::today())->where('manager_id', Auth::user()->id)->get();
+            $services = Service::where('manager_id', Auth::user()->id)
+            ->with('customer')
+            ->get();
             return $services;
-            return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de mesa de ayuda por lo tanto se muestran los servicios que haya levantado este usuario.']);
+            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de mesa de ayuda por lo tanto se muestran los servicios que haya levantado este usuario.']);
         }
         if (getRoles()['rol_tec']) {
-            $services = Service::whereDate('schedule', Carbon::today())->where('technical_id', Auth::user()->id)->get();
+            $services = Service::where('technical_id', Auth::user()->id)
+            ->with('customer')
+            ->get();
             return $services;
-            return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de técnico por lo tanto se muestran los servicios asignados a este usuario.']);
+            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de técnico por lo tanto se muestran los servicios asignados a este usuario.']);
         }
-        $services = Service::whereDate('schedule', Carbon::today())->where('technical_id', 0)->get();
-        return $services;
-        return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil no cuenta con ningun rol verifique con el administrador.']);
     }
 }

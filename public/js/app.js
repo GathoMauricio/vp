@@ -53795,6 +53795,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var array_servicios = [];
         var color_item = '';
         $.each(servicios, function (index, servicio) {
+          console.log(JSON.stringify(servicio));
+
           switch (servicio.status_service_id) {
             case '1':
               color_item = '#566573';
@@ -53818,7 +53820,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
 
           array_servicios.push({
-            title: servicio.service_report,
+            title: ' Hrs. ' + servicio.customer.code,
             start: servicio.schedule,
             url: $("#txt_show_service_calendar").val() + '/' + servicio.id,
             color: color_item
