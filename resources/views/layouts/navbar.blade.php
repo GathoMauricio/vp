@@ -95,6 +95,9 @@
                         <a class="dropdown-item" href="{{ route('index_service') }}">
                             Lista de servicios
                         </a>
+                        <a onclick="buscadorServicios();" class="dropdown-item" href="#">
+                            Buscador de servicios
+                        </a>
                         @if(!getRoles()['rol_tec'] || getRoles()['rol_mesa'] || getRoles()['rol_admin'])
                         <a class="dropdown-item" href="{{ route('create_service') }}">
                             Nuevo servicio
@@ -162,3 +165,4 @@
     </div>
 </nav>
 <br><br><br>
+@include('services.search_service_modal')

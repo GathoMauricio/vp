@@ -162,16 +162,8 @@ Route::middleware(['check_login'])->group(function () {
 
     //Inserta bitacora ajax
     Route::post('store_comment','BitacoraController@store')->name('store_comment');
+
+    //Buscar servicios por parametros
+    Route::get('search_service','ServiceController@searchService')->name('search_service');
 });
 
-Route::get('test',function(){
-
-    $fragmentos = explode(' ',"osCaR mAurIcio");
-    $resultado ="";
-    for($i=0;$i<count($fragmentos);$i++)
-    {
-        $resultado .= Str::studly(strtolower($fragmentos[$i]))." ";
-    }
-    echo $resultado;
-    
-})->name('test');

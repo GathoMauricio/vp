@@ -50,6 +50,52 @@ class ServiceController extends Controller
         return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil no cuenta con ningun rol verifique con el administrador.']);
     }
 
+    function searchService(Request $request)
+    {
+        $consulta = (new Service)->newQuery();
+        $consulta->when(!empty($request->date1) && !empty($request->date2), function ($query) use ($request) {
+			return $query->whereBetween('schedule', [$request->date1.' 00:00:00', $request->date2.' 23:59:59']);
+        });
+        $consulta->when(!empty($request->customer_id), function ($query) use ($request) {
+			return $query->where('customer_id',$request->customer_id);
+		});
+        $consulta->when(!empty($request->final_user_id), function ($query) use ($request) {
+			return $query->where('final_user_id',$request->final_user_id);
+        });
+        if (getRoles()['rol_admin']) {
+            //Sin condición
+            $consulta->orderBy('schedule','desc');
+            $consulta
+            ->with('customer');
+            return view('services.result_search_service',['services' => $consulta->get()]);
+        }
+        if (getRoles()['rol_mesa'] && getRoles()['rol_tec']) {
+            $consulta
+            ->where('manager_id', Auth::user()->id)
+            ->orWhere('technical_id', Auth::user()->id);
+            $consulta->orderBy('schedule','desc');
+            $consulta
+            ->with('customer');
+            return view('services.result_search_service',['services' => $consulta->get()]);
+        }
+        if (getRoles()['rol_mesa']) {
+            $consulta
+            ->where('manager_id', Auth::user()->id);
+            $consulta->orderBy('schedule','desc');
+            $consulta
+            ->with('customer');
+            return view('services.result_search_service',['services' => $consulta->get()]);
+        }
+        if (getRoles()['rol_tec']) {
+            $consulta
+            ->where('technical_id', Auth::user()->id);
+            $consulta->orderBy('schedule','desc');
+            $consulta
+            ->with('customer');
+            return view('services.result_search_service',['services' => $consulta->get()]);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -421,16 +467,9 @@ class ServiceController extends Controller
     }
     public function indexAjax()
     {
-        /*
-        $services = Service::where('technical_id', Auth::user()->id)
-        ->get();
-        return $services;
-        */
-        
         if (getRoles()['rol_admin']) {
             $services = Service::with('customer')->get();
             return $services;
-            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de administrador por lo tanto se muestran todos los servicios existentes.']);
         }
         if (getRoles()['rol_mesa'] && getRoles()['rol_tec']) {
             $services = Service::where('manager_id', Auth::user()->id)
@@ -438,21 +477,18 @@ class ServiceController extends Controller
                 ->with('customer')
                 ->get();
             return $services;
-            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta tanto con rol de mesa de ayuda como de técnico se muestran tanto los servicios levantados como asignanos a este usuario.']);
         }
         if (getRoles()['rol_mesa']) {
             $services = Service::where('manager_id', Auth::user()->id)
             ->with('customer')
             ->get();
             return $services;
-            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de mesa de ayuda por lo tanto se muestran los servicios que haya levantado este usuario.']);
         }
         if (getRoles()['rol_tec']) {
             $services = Service::where('technical_id', Auth::user()->id)
             ->with('customer')
             ->get();
             return $services;
-            //return view('services/index_service', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de técnico por lo tanto se muestran los servicios asignados a este usuario.']);
         }
     }
 }

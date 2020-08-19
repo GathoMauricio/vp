@@ -55,8 +55,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="hidden" id="ruta_cargar_usuario_final"
-                                value="{{ route('cargar_usuario_final') }}">
                             <label for="usuario_final" class="font-weight-bold" style="width:100%">Usuario final <a id="link_usuario_final_ajax" onclick="$('#create_final_user_modal').modal();" href="#" class="float-right" style="display:none"><span class="icon icon-plus"></span> Crear usuario final</a></label>
                             <select id="cbo_usuario_final" name="final_user_id" class="form-control">
                                 <option value>--Seleccione una opción--</option>

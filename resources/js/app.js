@@ -213,6 +213,32 @@ window.cargarUsuariosFinales = function(value)
         }
     });
 }
+window.cargarUsuariosFinalesSearch = function(value)
+{
+    if(value.length > 0){
+        $("#customer_id_create_usuario_final_axax").val(value);
+        $("#link_usuario_final_ajax").css('display', 'block');
+    }else{
+        $("#customer_id_create_usuario_final_axax").val('');
+        $("#link_usuario_final_ajax").css('display', 'none');
+    }
+    var ruta = $("#ruta_cargar_usuario_final").val();
+    var combo_search = $("#cbo_usuario_final_search");
+    combo_search.html("--Seleccione una opción--");
+    $.ajax({
+        url: ruta,
+        data:{
+            'value':value
+        },
+        success: function(respuesta) {
+            //console.log(respuesta);
+            combo_search.append(respuesta);
+        },
+        error: function() {
+            console.log("No se ha podido obtener la información");
+        }
+    });
+}
 window.getSepomex = function(value) {
     $('#txt_cp_sepomex').css('color','black');
     $("#cbo_asentamiento_sepomex").html('');
@@ -283,6 +309,11 @@ window.switchCommentBox = function(){
 window.openCalendar = function(){
     $("#calendar_container").css('display','block');
 }
+
 window.closeCalendar = function(){
     $("#calendar_container").css('display','none');
+}
+
+window.buscadorServicios = function(){
+    $("#search_service_modal").modal('show');
 }
