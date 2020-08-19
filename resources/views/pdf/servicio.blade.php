@@ -44,6 +44,11 @@
                         {{ $service->service_report }}
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="font-weight-bold">Responsable:</span>  <i>{{ $service->customer['responsable_name'] }} {{ $service->customer['responsable_last_name1'] }} {{ $service->customer['responsable_last_name2'] }}</i>
+                    </td>
+                </tr>
             </table>
             <table style="width:100%;" class="table">
                 <tr><td colspan="3" style="background-color:#D5D8DC " class="font-weight-bold">Contacto</td></tr>
