@@ -52,6 +52,7 @@ class BitacoraController extends Controller
                 'icon' => 'icon-bubbles4',
                 'color' => '#2ECC71'
             ]);
+            sendFcm($service->manager['fcm_token'],"Nuevo comentario","Servicio de ".$service->customer['code'],$service->id);
         }
         if(Auth::user()->id == $service->manager_id)
         {
@@ -64,6 +65,7 @@ class BitacoraController extends Controller
                 'icon' => 'icon-bubbles4',
                 'color' => '#2ECC71'
             ]);
+            sendFcm($service->technical['fcm_token'],"Nuevo comentario","Servicio de ".$service->customer['code'],$service->id);
         }
         //Crear notificación
         $notificacion = new NotificationController();

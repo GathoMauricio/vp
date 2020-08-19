@@ -30,6 +30,7 @@ class User extends Authenticatable
         'image',
         'password',
         'api_token',
+        'fcm_token',
         'created_at',
         'updated_at'
     ];

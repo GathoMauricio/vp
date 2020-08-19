@@ -69,6 +69,7 @@ class CommentController extends Controller
                     'timestamp' => date_format(new \DateTime($comment->created_at), 'd-m-Y g:i A') 
                 ]
             );
+            sendFcm($service->manager['fcm_token'],"Nuevo comentario","Servicio de ".$service->customer['code'],$service->id);
         }
         //si el manager es igual al usuario logeado el emisor es manager y receptor es technical
         if(Auth::user()->id == $service->manager_id)
@@ -95,6 +96,7 @@ class CommentController extends Controller
                     'timestamp' => date_format(new \DateTime($comment->created_at), 'd-m-Y g:i A')
                 ]
             );
+            sendFcm($service->technical['fcm_token'],"Nuevo comentario","Servicio de ".$service->customer['code'],$service->id);
         }
         //Regresar al la vista del servicio (show_service)
         return Redirect::back();

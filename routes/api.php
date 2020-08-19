@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/show_service','ApiServiceController@show')-
 Route::middleware('auth:api')->post('/store_firma','ApiFirmaController@store')->name('store_firma');
 //Obtener firma del usuario_final
 Route::middleware('auth:api')->get('/show_firma','ApiFirmaController@show')->name('show_firma');
+//Actualizar token FCM usuario
+Route::middleware('auth:api')->post('/update_fcm_token','ApiUserController@updateFcmToken')->name('update_fcm_token');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
