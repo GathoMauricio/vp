@@ -113,7 +113,7 @@ class ApiServiceController extends Controller
             [
                 'service_id' => $request->service_id,
                 'route' => $nombre,
-                'description' => "Descripcion de API"
+                'description' => $request->description
             ]
         );
         if($myfile)
