@@ -29,6 +29,12 @@ Route::middleware('auth:api')->post('/update_fcm_token','ApiUserController@updat
 Route::middleware('auth:api')->post('store_evidence','ApiServiceController@storeEvidence')->name('store_evidence');
 //Subir evidencia gallery
 Route::middleware('auth:api')->post('upload_evidence','ApiServiceController@uploadEvidence')->name('upload_evidence');
+//Cargar evidencias
+Route::middleware('auth:api')->get('index_evidencia','ApiServiceController@indexEvidencia')->name('index_evidencia');
+//Cargar Mensajes
+Route::middleware('auth:api')->get('index_mensajes','ApiServiceController@indexMensajes')->name('index_mensajes');
+//Insertar mensaje 
+Route::middleware('auth:api')->post('store_mensaje','ApiServiceController@storeMensaje')->name('store_mensaje');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use App\Service;
 use Storage;
 use App\File;
+use App\Comment;
 
 use Illuminate\Http\Request;
 
@@ -137,5 +138,57 @@ class ApiServiceController extends Controller
         $service->save();
         */
         return $service;
+    }
+    public function indexEvidencia(Request $request)
+    {
+        $json = [];
+        $files = File::where('service_id',$request->service_id)->get();
+        foreach($files as $file)
+        {
+            $json[] = [
+                'id' => $file->id,
+                'date' => date_format(new \DateTime($file->created_at), 'd-m-Y g:i A'),
+                'src' =>  env('APP_URL').'/public/storage'.'/'.$file->route,
+                'description' => $file->description
+            ];
+        }
+        return $json;
+    }
+    public function indexMensajes(Request $request)
+    {
+        $json = [];
+        $comentarios = Comment::where('service_id', $request->service_id)
+        ->orderBy('created_at', 'ASC')
+        ->with('user')
+        ->get();
+        foreach($comentarios as $comentario)
+        {
+            $json[] = [
+                'id' => $comentario->id,
+                'user' => $comentario->user['name'].' '.$comentario->user['last_name1'].' '.$comentario->user['last_name2'],
+                'comment' => $comentario->comment,
+                'date' => date_format(new \DateTime($comentario->created_at), 'd-m-Y g:i A')
+            ];
+        }
+        return $json;
+    }
+    public function storeMensaje(Request $request)
+    {
+        Comment::create($request->all());
+        $json = [];
+        $comentarios = Comment::where('service_id', $request->service_id)
+        ->orderBy('created_at', 'ASC')
+        ->with('user')
+        ->get();
+        foreach($comentarios as $comentario)
+        {
+            $json[] = [
+                'id' => $comentario->id,
+                'user' => $comentario->user['name'].' '.$comentario->user['last_name1'].' '.$comentario->user['last_name2'],
+                'comment' => $comentario->comment,
+                'date' => date_format(new \DateTime($comentario->created_at), 'd-m-Y g:i A')
+            ];
+        }
+        return $json;
     }
 }
