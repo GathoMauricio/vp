@@ -122,4 +122,20 @@ class ApiServiceController extends Controller
             \Storage::disk('local')->put($nombre,\File::get($file));
         }
     }
+    public function uploadEvidence(Request $request)
+    {
+        $service = Service::findOrFail($request->service_id);
+        $report = str_replace('/','-',$service->service_report);
+        $image = $request->image;  // your base64 encoded
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = 'evidenceTest_'.$service->customer['code'].'_'.$report.'.'.'png';
+        //\File::put(storage_path(). '/' . $imageName, base64_decode($image));
+        Storage::disk('local')->put($imageName,base64_decode($image));
+        /*
+        $service->firm = $imageName;
+        $service->save();
+        */
+        return $service;
+    }
 }

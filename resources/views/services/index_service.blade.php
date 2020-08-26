@@ -104,18 +104,18 @@
 
 </div>
 <div id="calendar_container">
-    <br><br>
-    <div style="width:100%;padding:10px;text-align:right;">
-        <span onclick="closeCalendar();" class="icon icon-cross" style="cursor:pointer;"></span>
-    </div>
     <input type="hidden" id="txt_show_service_calendar" value="{{ route('show_service') }}">
     <input type="hidden" id="txt_index_ajax" value="{{  route('index_ajax') }}">
     <div class="row shadow p-3  bg-white rounded">
+        <div style="width:100%;padding:5px;text-align:right;">
+            <span onclick="closeCalendar();" class="icon icon-cross" style="cursor:pointer;"></span>
+        </div>
         <div class="col"></div>
-        <div class="col-12">
+        <div class="col-6">
             <div id="calendar"></div>
         </div>
         <div class="col"></div>
+        <br>
     </div>
 </div>
 <div id="container_clendar_button">

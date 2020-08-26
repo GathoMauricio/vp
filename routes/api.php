@@ -25,9 +25,10 @@ Route::middleware('auth:api')->post('/store_firma','ApiFirmaController@store')->
 Route::middleware('auth:api')->get('/show_firma','ApiFirmaController@show')->name('show_firma');
 //Actualizar token FCM usuario
 Route::middleware('auth:api')->post('/update_fcm_token','ApiUserController@updateFcmToken')->name('update_fcm_token');
-//Subir evidencia
+//Subir evidencia camera
 Route::middleware('auth:api')->post('store_evidence','ApiServiceController@storeEvidence')->name('store_evidence');
-
+//Subir evidencia gallery
+Route::middleware('auth:api')->post('upload_evidence','ApiServiceController@uploadEvidence')->name('upload_evidence');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
