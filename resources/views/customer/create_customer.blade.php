@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="responsable_name" class="font-weight-bold">Nombre de la pesona responsable</label>
+                            <label for="responsable_name" class="font-weight-bold">Nombre de la persona responsable</label>
                             <input name="responsable_name" type="text" value="{{ old('responsable_name') }}" class="form-control">
                             @if($errors->has('responsable_name')) <small style="color:red">{{ $errors->first('responsable_name') }}</small>@endif
                         </div>
