@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            @if(exists($customer) && $customer->customer_type_id > 2 )
+                            @if(isset($customer) && $customer->customer_type_id > 2 )
                             <label for="" class="font-weight-bold">Descripción *</label>
                             @else
                             <label for="" class="font-weight-bold">Area *</label>
