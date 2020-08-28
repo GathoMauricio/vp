@@ -30,7 +30,7 @@
             @endphp
             <tr>
                 <tr>
-                    <td><img src="{{asset('img/customer')}}/{{$customer->image}}" alt="{{$customer->image}}" width="80" height="80" style="border-radius:150px;"></td>
+                    <td><img src="{{ asset('storage/') }}/{{$customer->image}}" alt="{{$customer->image}}" width="80" height="80" style="border-radius:150px;"></td>
                     <td>{{ $customer->customer_type['customer_type'] }}</td>
                     <td>{{ $customer->name }}</td>
                     <td>{{ $customer->phone }}</td>

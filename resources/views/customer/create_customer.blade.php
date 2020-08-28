@@ -7,7 +7,7 @@
     </div>
     <div class="row shadow p-3 mb-5 bg-white rounded">
         <div class="container">
-            <form id="frm_create_customer" action="{{ route('store_customer') }}" class="form" method="POST">
+            <form enctype="multipart/form-data" id="frm_create_customer" action="{{ route('store_customer') }}" class="form" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -74,18 +74,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="phone" class="font-weight-bold">Teléfono</label>
                             <input name="phone" type="text" value="{{ old('phone') }}" class="form-control">
                             @if($errors->has('phone')) <small style="color:red">{{ $errors->first('phone') }}</small>@endif
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="adress" class="font-weight-bold">Email</label>
-                            <input name="email" type="text" value="{{ old('email') }}" class="form-control" >
+                            <input name="email" type="email" value="{{ old('email') }}" class="form-control" accept="image/x-png,image/gif,image/jpeg">
                             @if($errors->has('email')) <small style="color:red">{{ $errors->first('email') }}</small>@endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="image" class="font-weight-bold">Imagen</label>
+                            <input name="image" type="file" value="{{ old('image') }}" class="form-control" >
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ use App\FinalUser;
 use App\CustomerType;
 use App\Http\Requests\CustomerRequest;
 use Redirect;
+use Storage;
 
 class CustomerController extends Controller
 {
@@ -60,8 +61,20 @@ class CustomerController extends Controller
                 'estado'=>$customer->estado,
                 'calle_numero'=>$customer->calle_numero,
                 'piso'=>$customer->piso,
-                'interior'=>$customer->interior,
+                'interior'=>$customer->interior
             ]);
+
+            if(isset($request->image))
+            {
+                $file = $request->file('image');
+                $nombre = "customer_".$file->getClientOriginalName();
+                $customer->image = $nombre;
+                if($customer->save())
+                {
+                    \Storage::disk('local')->put($nombre,\File::get($file));
+                }
+            }
+
             return redirect('show_customer/'.$customer->id)->with('mensaje','El cliente se creó con éxito.');
         }
     }

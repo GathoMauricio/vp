@@ -13,7 +13,7 @@
             
             <div class="row">
                 <div class="col-md-3">
-                    <img src="{{asset('img/customer')}}/{{$customer->image}}" alt="{{$customer->image}}" width="80" height="80" style="border-radius:150px;">
+                    <img src="{{ asset('storage/') }}/{{$customer->image}}" alt="{{$customer->image}}" width="80" height="80" style="">
                 </div>
                 <div class="col-md-3">
                     <label for="" class="font-weight-bold">Nombre / Razón social</label>
@@ -109,7 +109,7 @@
                         @else 
                         @foreach($finalUsers as $finalUser)
                         <tr>
-                            <td><img src="{{asset('img/final_user')}}/{{$finalUser->image}}" alt="{{$customer->image}}" width="80" height="80" style="border-radius:150px;"></td>
+                            <td><img src="{{ asset('storage/') }}/{{$finalUser->image}}" alt="{{$customer->image}}" width="80" height="80" style="border-radius:150px;"></td>
                             <td>{{ $finalUser->name }} {{ $finalUser->last_name1 }} {{ $finalUser->last_name2 }}</td>
                             <td>{{ $finalUser->email }}</td>
                             <td>{{ $finalUser->phone }}</td>
