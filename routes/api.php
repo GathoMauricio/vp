@@ -41,6 +41,11 @@ Route::middleware('auth:api')->post('iniciar_servicio','ApiServiceController@ini
 Route::middleware('auth:api')->get('validar_evidencia','ApiServiceController@validarEvidencia')->name('validar_evidencia');
 //Finalizar servicio
 Route::middleware('auth:api')->put('finalizar_servicio','ApiServiceController@finalizarServicio')->name('finalizar_servicio');
+//Reagendar servicio
+Route::middleware('auth:api')->post('reagendar_servicio','ApiServiceController@reagendarServicio')->name('reagendar_servicio');
+//Cancelar servicio
+Route::middleware('auth:api')->post('cancelar_servicio','ApiServiceController@cancelarServicio')->name('cancelar_servicio');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

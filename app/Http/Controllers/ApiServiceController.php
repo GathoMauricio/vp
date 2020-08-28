@@ -292,4 +292,64 @@ class ApiServiceController extends Controller
                     );
         return ['error' => 0 , 'msg' => 'El servicio se ha finalizado con éxito'];
     }
+    public function reagendarServicio(Request $request)
+    {
+        $comment = Comment::create([
+            'service_id' => $request->service_id,
+            'comment_type_id' => 2,
+            'comment' => $request->comment . ' (' . $request->fecha . ' A las ' . $request->hora . ' Hrs.)'
+
+        ]);
+        $service = Service::findOrFail($request->service_id);
+        Mensaje::create([
+            'service_id' => $service->id,
+            'emisor_id' => $service->technical_id,
+            'receptor_id' => $service->manager_id,
+            'mensaje' => 'Ha solicitado reagendar el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+            'icon' => 'icon-clock',
+            'color' => 'orange'
+        ]);
+        $notificacion = new NotificationController();
+            $notificacion->sendMensaje(
+                'user_channel_'.$service->manager_id,
+                'mensaje_push',
+                [
+                    'cliente' => $service->customer['code'],
+                    'emisor' => $service->technical['name'].' '.$service->technical['last_name1'],
+                    'mensaje' => 'Ha solicitado reagendar el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]
+            );
+            return ['error' => 0 , 'msg' => 'La solicitud se envió con éxito'];
+    }
+    public function cancelarServicio(Request $request)
+    {
+        $comment = Comment::create([
+            'service_id' => $request->service_id,
+            'comment_type_id' => 3,
+            'comment' => $request->comment
+
+        ]);
+        $service = Service::findOrFail($request->service_id);
+        Mensaje::create([
+            'service_id' => $service->id,
+            'emisor_id' => $service->technical_id,
+            'receptor_id' => $service->manager_id,
+            'mensaje' => 'Ha solicitado cancelar el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+            'icon' => 'icon-bin',
+            'color' => 'red'
+        ]);
+        $notificacion = new NotificationController();
+            $notificacion->sendMensaje(
+                'user_channel_'.$service->manager_id,
+                'mensaje_push',
+                [
+                    'cliente' => $service->customer['code'],
+                    'emisor' => $service->technical['name'].' '.$service->technical['last_name1'],
+                    'mensaje' => 'Ha solicitado cancelar el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]
+            );
+            return ['error' => 0 , 'msg' => 'La solicitud se envió con éxito'];
+    }
 }
