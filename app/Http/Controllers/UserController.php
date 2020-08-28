@@ -12,6 +12,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserPwdRequest;
 use Redirect;
 use DB;
+use Str;
 
 class UserController extends Controller
 {
@@ -50,6 +51,9 @@ class UserController extends Controller
             $user = User::create($request->except('repassword'));
             if($user)
             {
+                //Crear token
+                $user->api_token = Str::random(60);
+                $user->save();
                 //Eliminar roles existentes para este usuario
                 DB::table('users_roles')->where('user_id',$user->id)->delete();
                 //Crear nueva lista de roles
