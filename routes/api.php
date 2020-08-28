@@ -35,6 +35,13 @@ Route::middleware('auth:api')->get('index_evidencia','ApiServiceController@index
 Route::middleware('auth:api')->get('index_mensajes','ApiServiceController@indexMensajes')->name('index_mensajes');
 //Insertar mensaje 
 Route::middleware('auth:api')->post('store_mensaje','ApiServiceController@storeMensaje')->name('store_mensaje');
+//Iniciar un servicio
+Route::middleware('auth:api')->post('iniciar_servicio','ApiServiceController@iniciarServicio')->name('iniciar_servicio');
+//Validar evidencias
+Route::middleware('auth:api')->get('validar_evidencia','ApiServiceController@validarEvidencia')->name('validar_evidencia');
+//Finalizar servicio
+Route::middleware('auth:api')->put('finalizar_servicio','ApiServiceController@finalizarServicio')->name('finalizar_servicio');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

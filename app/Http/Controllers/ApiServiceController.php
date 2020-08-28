@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\NotificationController;
 use Carbon\Carbon;
 use App\Service;
 use Storage;
 use App\File;
 use App\Comment;
+use App\Mensaje;
 
 use Illuminate\Http\Request;
 
@@ -190,5 +192,104 @@ class ApiServiceController extends Controller
             ];
         }
         return $json;
+    }
+    public function iniciarServicio(Request $request)
+    {
+        if ($request->comment != null) {
+            $comment = Comment::create([
+                'service_id' => $request->service_id,
+                'comment_type_id' => 1,
+                'comment' => $request->comment
+            ]);
+            if ($comment) {
+                $service = Service::findOrFail($request->service_id);
+                $service->status_service_id = 2;
+                $service->init_service = date('Y-m-d H:i:s');
+                $service->save();
+                Mensaje::create([
+                    'service_id' => $service->id,
+                    'emisor_id' => $service->technical_id,
+                    'receptor_id' => $service->manager_id,
+                    'mensaje' => 'Ha iniciado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                    'icon' => 'icon-share',
+                    'color' => 'blue'
+                ]);
+                $notificacion = new NotificationController();
+                $notificacion->sendMensaje(
+                    'user_channel_'.$service->manager_id,
+                    'mensaje_push',
+                    [
+                        'cliente' => $service->customer['code'],
+                        'emisor' => $service->technical['name'].' '.$service->technical['last_name1'],
+                        'mensaje' => 'Ha iniciado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                        'timestamp' => date('Y-m-d H:i:s')
+                    ]
+                );
+                return ['error' => 0 , 'msg' => 'El servicio se ha iniciado con éxito'];
+            }
+        } else {
+            $service = Service::findOrFail($request->service_id);
+            $service->status_service_id = 2;
+            $service->init_service = date('Y-m-d H:i:s');
+            $service->save();
+            Mensaje::create([
+                'service_id' => $service->id,
+                'emisor_id' => $service->technical_id,
+                'receptor_id' => $service->manager_id,
+                'mensaje' => 'Ha iniciado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                'icon' => 'icon-share',
+                'color' => 'blue'
+            ]);
+            $notificacion = new NotificationController();
+                $notificacion->sendMensaje(
+                    'user_channel_'.$service->manager_id,
+                    'mensaje_push',
+                    [
+                        'cliente' => $service->customer['code'],
+                        'emisor' => $service->technical['name'].' '.$service->technical['last_name1'],
+                        'mensaje' => 'Ha iniciado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                        'timestamp' => date('Y-m-d H:i:s')
+                    ]
+                );
+                return ['error' => 0 , 'msg' => 'El servicio se ha iniciado con éxito'];
+        }
+        return ['error' => 1 , 'msg' => 'Error al procesar la petición'];
+    }
+
+    public function validarEvidencia(Request $request)
+    {
+        
+        return [
+            'evidencia' => count(File::where('service_id',$request->service_id)->get()),
+            'firma' => count(Service::where('id',$request->service_id)->where('firm','!=',NULL)->get())
+        ];
+    }
+    public function finalizarServicio(Request $request)
+    {
+        $service = Service::findOrFail($request->service_id);
+                $service->status_service_id = 3;
+                $service->solution = $request->solution;
+                $service->end_service = date('Y-m-d H:i:s');
+                $service->save();
+                Mensaje::create([
+                    'service_id' => $service->id,
+                    'emisor_id' => $service->technical_id,
+                    'receptor_id' => $service->manager_id,
+                    'mensaje' => 'Ha finalizado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                    'icon' => 'icon-checkmark',
+                    'color' => 'green'
+                ]);
+                $notificacion = new NotificationController();
+                    $notificacion->sendMensaje(
+                        'user_channel_'.$service->manager_id,
+                        'mensaje_push',
+                        [
+                            'cliente' => $service->customer['code'],
+                            'emisor' => $service->technical['name'].' '.$service->technical['last_name1'],
+                            'mensaje' => 'Ha finalizado el servicio de '.$service->customer['code'].' con folio '.$service->service_report,
+                            'timestamp' => date('Y-m-d H:i:s')
+                        ]
+                    );
+        return ['error' => 0 , 'msg' => 'El servicio se ha finalizado con éxito'];
     }
 }
