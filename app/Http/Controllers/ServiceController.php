@@ -248,7 +248,8 @@ class ServiceController extends Controller
     public function printSErviceFormat(Request $request, $id)
     {
         $service = Service::findOrFail($id);
-        $pdf = \PDF::loadView('pdf.servicio', ['service' => $service]);
+        //$pdf = \PDF::loadView('pdf.servicio', ['service' => $service]);
+        $pdf = \PDF::loadView('pdf.reporte_interno', ['service' => $service]);
         return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
     }
     public function editStatusService(Request $request, $id, $status)

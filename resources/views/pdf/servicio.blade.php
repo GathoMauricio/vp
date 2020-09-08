@@ -20,7 +20,7 @@
             <table class="table" style="width:100%;">
                 <tr>
                     <td width="20%">
-                        <img src="{{public_path('img\512x512.png')}}" style="width:90px;height:80px;">
+                        <img src="{{public_path('img\logo_vp.png')}}" style="width:90px;height:80px;">
                     </td>
                     <td width="80%">
                         <center><h5 class="font-weight-bold">BITÁCORA DE CONTROL DE SOPORTE TÉCNICO</h5></center>

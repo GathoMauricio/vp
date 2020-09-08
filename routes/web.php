@@ -167,7 +167,10 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('search_service','ServiceController@searchService')->name('search_service');
 });
 
-Route::get('fcm', function(){
-    //return sendFcm();
-})->name('fcm');
+Route::get('reporte', function(){
+    return view('pdf.reporte_interno');
+})->name('reporte');
 
+Route::get('servicio', function(){
+    return view('pdf.servicio',['service'=>\App\Service::find(32)]);
+})->name('servicio');
