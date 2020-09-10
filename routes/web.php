@@ -165,6 +165,11 @@ Route::middleware(['check_login'])->group(function () {
 
     //Buscar servicios por parametros
     Route::get('search_service','ServiceController@searchService')->name('search_service');
+
+    //Insertar reemplazo
+    Route::post('store_reemplazo','ReemplazoController@store')->name('store_reemplazo');
+
+
 });
 
 Route::get('reporte', function(){
@@ -172,5 +177,8 @@ Route::get('reporte', function(){
 })->name('reporte');
 
 Route::get('servicio', function(){
-    return view('pdf.servicio',['service'=>\App\Service::find(32)]);
+    return view('pdf.reporte_interno',[
+        'service' => \App\Service::find(2),
+        'reemplazos' => \App\Reemplazo::where('service_id',2)->get()
+        ]);
 })->name('servicio');

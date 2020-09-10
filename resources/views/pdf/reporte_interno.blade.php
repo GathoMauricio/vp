@@ -27,11 +27,11 @@
         <table style="width:100%;">
             <tr>
                 <td width="20%">Tipo de Servicio:</td>
-                <td width="40%">Soporte Técnico En sitio</td>
+                <td width="40%"><b>{{ $service->service_type['service_type'] }}</b></td>
                 <td width="40%">
-                    Fecha: 15 de Diciembre del 2020
+                    Fecha: <b>{{ date_format(new \DateTime(date('Y-m-d H:i:s')), 'd-m-Y g:i A') }}</b>
                     <br>
-                    Folio Ticket: 00123456782020
+                    Folio Ticket: <b>{{ $service->service_report }}</b>
                 </td>
             </tr>
         </table>
@@ -42,46 +42,75 @@
         <table style="width:100%;" border="1">
             <tr>
                 <td>Nombre o Razón Social</td>
-                <td>Eurologistic Yac S.A. de C.V.</td>
+                <td><b>{{ $service->customer['name'] }}</b></td>
             </tr>
             <tr>
                 <td>Dirección.</td>
-                <td>Bosques de las Naciones #9 Int. 3 Col. San Juan Aragón, Nezahualcóyotl, CP. 57000, Edo Méx.</td>
+                <td>
+                    <b>
+                        {{ $service->customer['calle_numero'] }}
+                        @if(!empty($service->customer['interior']))
+                        Int {{ $service->customer['interior'] }}
+                        @endif
+                        @if(!empty($service->customer['piso']))
+                        Piso {{ $service->customer['piso'] }}
+                        @endif
+                        Cp. {{ $service->customer['cp'] }}
+                        {{ $service->customer['asentamiento'] }}
+                        {{ $service->customer['ciudad'] }}
+                        {{ $service->customer['municipio'] }},
+                        {{ $service->customer['estado'] }}
+                    </b>
+                </td>
             </tr>
             <tr>
                 <td>Responsable.</td>
-                <td>Christian Michelle Aoyama Zepeda</td>
+                <td>
+                    <b>
+                        {{ $service->customer['responsable_name'] }}
+                        {{ $service->customer['responsable_last_name1'] }}
+                        {{ $service->customer['responsable_last_name2'] }}
+                    </b>
+                </td>
             </tr>
             <tr>
                 <td>Mail.</td>
-                <td>caoyama@eurologisticyac.com.mx</td>
+                <td><b>{{ $service->customer['email'] }}</b></td>
             </tr>
             <tr>
                 <td>Teléfono.</td>
-                <td>(55) 50 16 12 27</td>
-            </tr>
-            <tr>
-                <td>Ext.</td>
-                <td>202</td>
+                <td><b>{{ $service->customer['phone'] }}</b></td>
             </tr>
         </table>
         <br>
         <table style="width:100%;" border="1">
             <tr>
                 <td>Código </td>
-                <td>YAC</td>
+                <td><b>{{ $service->customer['code'] }}</b></td>
             </tr>
             <tr>
                 <td>Mesa de Ayuda </td>
-                <td>Juanita Pérez Lonzibato</td>
+                <td>
+                    <b>
+                        {{ $service->manager['name'] }}
+                        {{ $service->manager['last_name1'] }}
+                        {{ $service->manager['last_name2'] }}
+                    </b>
+                </td>
             </tr>
             <tr>
                 <td>Técnico Asignado. </td>
-                <td>Omar Tinoco</td>
+                <td>
+                    <b>
+                        {{ $service->technical['name'] }}
+                        {{ $service->technical['last_name1'] }}
+                        {{ $service->technical['last_name2'] }}
+                    </b>
+                </td>
             </tr>
             <tr>
                 <td>Horario de Cita:</td>
-                <td>29 07 2020 – 10:16 am</td>
+                <td><b>{{ date_format(new \DateTime($service->schedule), 'd-m-Y g:i A') }}</b></td>
             </tr>
         </table>
     </div>
@@ -91,19 +120,22 @@
         <table style="width:100%;" border="1">
             <tr>
                 <td>Nombre </td>
-                <td>Christian Michelle Aoyama Zepeda</td>
+                <td>
+                    <b>
+                        {{ $service->usuario_Final['name'] }}
+                        {{ $service->usuario_Final['last_name1'] }}
+                        {{ $service->usuario_Final['last_name2'] }}
+                    </b>
+                </td>
             </tr>
             <tr>
                 <td>Telefono </td>
-                <td>5545656787</td>
+                <td><b>{{ $service->usuario_Final['phone'] }}</b></td>
             </tr>
-            <tr>
-                <td>Ext </td>
-                <td>1008</td>
-            </tr>
+
             <tr>
                 <td>Área</td>
-                <td>Dirección General.</td>
+                <td><b>{{ $service->usuario_Final['area_descripcion'] }}</b></td>
             </tr>
         </table>
     </div>
@@ -112,10 +144,10 @@
         <div class="title">Descripción del Servicio: Soporte Técnico En sitio.</div>
         <table style="width:100%;" border="1">
             <tr>
-                <td>Tipo de Equipo. Laptop</td>
-                <td>Marca:</td>
-                <td>Modelo:</td>
-                <td>N° Serie:</td>
+                <td>Tipo de Equipo. <b>{{ $service->tipo_equipo['tipo_equipo'] }}</b></td>
+                <td>Marca: <b>{{ $service->marca_equipo }}</b></td>
+                <td>Modelo: <b>{{ $service->modelo_equipo }}</b></td>
+                <td>N° Serie: <b>{{ $service->serie_equipo }}</b></td>
             </tr>
         </table>
         <table style="width:100%;" border="1">
@@ -124,50 +156,65 @@
                 <td>Observaciones (Mesa de ayuda).</td>
             </tr>
             <tr>
-                <td>Extraer grabación del dvr del día 25 de agosto del 2020.</td>
-                <td>El equipo graba aparentemente 5 días.</td>
+                <td><b>{{ $service->description }}</b></td>
+                <td><b>{{ $service->observations }}</b></td>
             </tr>
         </table>
         <table style="width:100%;" border="1">
+            @if(!empty($service->technical_observations))
             <tr>
-                <td width="20%">Observaciones.<br/>(Técnico)</td>
-                <td></td>
+                <td width="20%">Observaciones.<br />(Técnico)</td>
+                <td>{{ $service->technical_observations }}</td>
             </tr>
+            @endif
+            @if(!empty($service->technical_diagnostic))
             <tr>
-                <td width="20%">Diagnóstico.<br/>(Técnico)</td>
-                <td></td>
+
+                <td width="20%">Diagnóstico.<br />(Técnico)</td>
+                <td>{{ $service->technical_diagnostic }}</td>
             </tr>
+            @endif
+            @if(!empty($service->solution))
             <tr>
                 <td width="20%">Solución.</td>
-                <td></td>
+                <td>{{ $service->solution }}</td>
             </tr>
+            @endif
+
         </table>
     </div>
     <!--Si el servicio contiene productos se muestra esta parte-->
+    @if(count($reemplazos)>0)
     <br>
     <div class="zone">
         <div class="title">Reemplazo de Equipo, Módulos y Accesorios. </div>
         <table style="width:100%;" border="1">
             <thead>
                 <tr>
-                    <th>Equipo o Accesorio.</th>
+                    <th>Reemplazo</th>
                     <th>Marca</th>
                     <th>Modelo</th>
-                    <th>N° Serie.</th>
+                    <th>Serie</th>
                     <th>Otro</th>
-                    <th>Costo.</th>
-                    <th>Firma de Autorización.</th>
+                    <th>Costo</th>
+                    <th>Firma</th>
                 </tr>
             </thead>
+            @foreach($reemplazos as $reemplazo)
             <tr>
-                <td>Disco Duro</td>
-                <td>Seagate</td>
-                <td>RP2000</td>
-                <td>KBL52551084548664646</td>
-                <td>SATA 3.5</td>
-                <td>$ 1500.00</td>
-                <td>img</td>
+                <td>{{ $reemplazo->reemplazo }}</td>
+                <td>{{ $reemplazo->marca }}</td>
+                <td>{{ $reemplazo->modelo }}</td>
+                <td>{{ $reemplazo->serie }}</td>
+                <td>{{ $reemplazo->otro }}</td>
+                <td>${{ $reemplazo->costo }}</td>
+                @if(!empty($reemplazo->firma))
+                <td>{{ $reemplazo->firma }}</td>
+                @else
+                <td>No disponible</td>
+                @endif
             </tr>
+            @endforeach
         </table>
         <br>
         <span style="border: 2px solid #98ca48;float: right;font-size: 12px; padding: 10px;">
@@ -175,10 +222,11 @@
         </span>
         <br><br>
     </div>
-    <!--Si el equipo se retiró-->
+    @endif
+    <!--Si hay reagendados con retiro de equipo se miestra esta parte-->
     <br>
     <div class="zone">
-        <div class="title">El equipo se tiene que retirar</div>
+        <div class="title">Retiro de equipo</div>
         <table style="width:100%;" border="1">
             <thead>
                 <tr>
@@ -207,18 +255,25 @@
     </div>
     <br>
     <div style="width:100%;font-size: 12px;">
-        *	Para que el servicio realizado tenga garantía, el producto lo proveerá Victoria Project.
+        * Para que el servicio realizado tenga garantía, el producto lo proveerá Victoria Project.
         <br>
-        *	El costo de el (los) producto (s) únicamente será asignado por el área de Mesa de Ayuda de VP, y será informado al Cliente para aprobar su autorización.
+        * El costo de el (los) producto (s) únicamente será asignado por el área de Mesa de Ayuda de VP, y será
+        informado al Cliente para aprobar su autorización.
     </div>
     <br>
     <div class="zone">
         <div class="title" style="text-align: left;">Calificación del Servicio</div>
         <table style="width:100%;">
             <tr>
-                <td><center><img src="{{public_path('img\icon_good.png')}}" width="40" height="40"></center></td>
-                <td><center><img src="{{public_path('img\icon_regular.png')}}" width="40" height="40"></center></td>
-                <td><center><img src="{{public_path('img\icon_bad.png')}}" width="40" height="40"></center></td>
+                <td>
+                    <center><img src="{{public_path('img\icon_good.png')}}" width="40" height="40"></center>
+                </td>
+                <td>
+                    <center><img src="{{public_path('img\icon_regular.png')}}" width="40" height="40"></center>
+                </td>
+                <td>
+                    <center><img src="{{public_path('img\icon_bad.png')}}" width="40" height="40"></center>
+                </td>
             </tr>
         </table>
         <div class="title" style="text-align: left;">Recomendación para mejora del Servicio:</div>
@@ -226,12 +281,25 @@
     </div>
     <table style="width:100%;">
         <tr>
-            <td><br><br><br><center><hr style="border:1px solid #98ca48;">Firma de Usuario.</center></td>
-            <td><br><br><br><center><hr style="border:1px solid #98ca48;">Firma de Responsable.</center></td>
-            <td><br><br><br><center><hr style="border:1px solid #98ca48;">Firma de Técnico.</center></td>
+            <td><br><br><br>
+                <center>
+                    <hr style="border:1px solid #98ca48;">Firma de Usuario.</center>
+            </td>
+            <td><br><br><br>
+                <center>
+                    <hr style="border:1px solid #98ca48;">Firma de Responsable.</center>
+            </td>
+            <td><br><br><br>
+                <center>
+                    <hr style="border:1px solid #98ca48;">Firma de Técnico.</center>
+            </td>
         </tr>
         <tr>
-            <td colspan="3"><center><span style="font-size: 12px;color:gray;">Victoria Project queda de Ud. para cualquier duda y/ó aclaración. www.victoriapro.com.mx , contacto@victoriapro.com.mx Oficina: 55 58 55 15 77 WhatsApp: 55 73 89 73 73. Carlos Victoria.</span></center></td>
+            <td colspan="3">
+                <center><span style="font-size: 12px;color:gray;">Victoria Project queda de Ud. para cualquier duda y/ó
+                        aclaración. www.victoriapro.com.mx , contacto@victoriapro.com.mx Oficina: 55 58 55 15 77
+                        WhatsApp: 55 73 89 73 73. Carlos Victoria.</span></center>
+            </td>
         </tr>
     </table>
     <style>
@@ -239,7 +307,8 @@
             padding: 10px;
         }
 
-        table tr td,table tr th {
+        table tr td,
+        table tr th {
             font-size: 12px;
             padding: 5px;
         }

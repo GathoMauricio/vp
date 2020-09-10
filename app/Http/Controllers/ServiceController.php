@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\UserRol;
 use App\Customer;
+use App\TipoEquipo;
 use App\Service;
 use App\ServiceType;
 use App\Comment;
 use App\Mensaje;
 use App\File;
+use App\Reemplazo;
 use App\Http\Requests\ServiceRequest;
 use Auth;
 use DB;
@@ -105,15 +104,14 @@ class ServiceController extends Controller
     {
 
         $servicesTypes = ServiceType::all();
-        //$technicals = User::where('user_type_id',3)->get();//El id 3 son los técnicos
-        //$technicals = User::all();
         $customers = Customer::all();
+        $tipos_equipos = TipoEquipo::all();
         return view(
             'services/create_service',
             [
                 'servicesTypes' => $servicesTypes,
-                //'technicals' => $technicals,
-                'customers' => $customers
+                'customers' => $customers,
+                'tipos_equipos' => $tipos_equipos
             ]
         );
     }
@@ -154,6 +152,12 @@ class ServiceController extends Controller
                             'timestamp' => date('Y-m-d H:i:s')
                         ]
                     );
+            sendFcm(
+                $service->technical['fcm_token'],
+                'Nuevo servicio para '.$service->customer['code'],
+                $service->manager['name'].' '.$service->manager['last_name1'].' te ha asignado un nuevo servicio para el '.date_format(new \DateTime($service->schedule), 'd-m-Y g:i A'),
+                $service->id
+                );
             return redirect('show_service/' . $service->id)->with('mensaje', 'El servicio se creó con éxito.');
         }
     }
@@ -248,8 +252,13 @@ class ServiceController extends Controller
     public function printSErviceFormat(Request $request, $id)
     {
         $service = Service::findOrFail($id);
-        //$pdf = \PDF::loadView('pdf.servicio', ['service' => $service]);
-        $pdf = \PDF::loadView('pdf.reporte_interno', ['service' => $service]);
+        $reemplazos = Reemplazo::where('service_id',$id)->get();
+        $pdf = \PDF::loadView('pdf.reporte_interno', 
+        [
+            'service' => $service,
+            'reemplazos' => $reemplazos
+            ]
+        );
         return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
     }
     public function editStatusService(Request $request, $id, $status)

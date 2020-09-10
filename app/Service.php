@@ -20,6 +20,12 @@ class Service extends Model
         'manager_id',
         'technical_id',
         'customer_id',
+        'tipo_equipo_id',
+        'marca_equipo',
+        'modelo_equipo',
+        'serie_equipo',
+        'technical_observations',
+        'technical_diagnostic',
         'description',
         'priority',
         'observations',
@@ -46,6 +52,16 @@ class Service extends Model
         (
             'App\StatusService',
             'status_service_id',
+            'id'
+        )
+        ->withDefault();
+    }
+    public function tipo_equipo()
+    {
+        return $this->belongsTo
+        (
+            'App\TipoEquipo',
+            'tipo_equipo_id',
             'id'
         )
         ->withDefault();

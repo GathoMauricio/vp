@@ -85,6 +85,49 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="tipo_equipo_id" class="font-weight-bold">Tipo de equipo</label>
+                            <select name="tipo_equipo_id" class="form-control">
+                                @foreach($tipos_equipos as $tipo_equipo)
+                                <option value="{{ $tipo_equipo->id }}">{{ $tipo_equipo->tipo_equipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @if($errors->has('tipo_equipo_id')) <small
+                            style="color:red">{{ $errors->first('tipo_equipo_id') }}</small>@endif
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="marca_equipo" class="font-weight-bold">Marca</label>
+                            <input type='text' name="marca_equipo" value="{{ old('marca_equipo') }}"
+                                class="form-control" />
+                        </div>
+                        @if($errors->has('marca_equipo')) <small
+                            style="color:red">{{ $errors->first('marca_equipo') }}</small>@endif
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="modelo_equipo" class="font-weight-bold">Modelo</label>
+                            <input type='text' name="modelo_equipo" value="{{ old('modelo_equipo') }}"
+                                class="form-control" />
+                        </div>
+                        @if($errors->has('modelo_equipo')) <small
+                            style="color:red">{{ $errors->first('modelo_equipo') }}</small>@endif
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="serie_equipo" class="font-weight-bold">Serie</label>
+                            <input type='text' name="serie_equipo" value="{{ old('serie_equipo') }}"
+                                class="form-control" />
+                        </div>
+                        @if($errors->has('serie_equipo')) <small
+                            style="color:red">{{ $errors->first('serie_equipo') }}</small>@endif
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Descripción</label>
