@@ -396,80 +396,39 @@
         </div>
     </div>
 </div>
-<!--
-    <div class="row shadow p-3 mb-5 bg-white rounded">
-        <div class="container">
-            <div class="row">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Comentarios</h4>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <form action="{{ route('store_comment') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="service_id" value="{{ $service->id }}">
-                        <input type="hidden" name="comment_type_id" value="1">
-                        <table style="width:100%;">
-                            <tr>
-                                <td width="95%"><input type="text" name="comment" class="form-control" placeholder="Escriba aquí..." required></td>
-                                <td width="5%"><input type="image" src="{{ asset('img/send.png') }}" width="80" height="60"></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+</div>
+<div class="row shadow p-3 mb-5 bg-white rounded">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Reagendados</h4>
+                @php
+                $reschedules = App\Reschedule::where('service_id', $service->id)->get();
+                @endphp
             </div>
         </div>
-    </div>
-    
-    <div class="row shadow p-3 mb-5 bg-white rounded">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    @if(count($comments) <= 0)
-                    <center>No se han agregado comentarios a este servicio</center>
-                    @endif
-                    @foreach($comments as $comment)
-                    <div class="comment-item">
-                        @if($comment->type['comment_type']=='Bitácora')
-                        <span style="color:white;padding:5px;" class="float-right bg-primary font-weight-bold" >
-                            {{ $comment->type['comment_type'] }}
-                        </span>
-                        @endif
-                        @if($comment->type['comment_type']=='Reagendar')
-                        <span class="float-right bg-warning font-weight-bold" style="padding:5px;">
-                            @if(getRoles()['rol_admin'] || getRoles()['rol_mesa'])
-                            <a style="color:white" href="#" class="font-weight-bold">{{ $comment->type['comment_type'] }}</a>
-                            @else
-                            {{ $comment->type['comment_type'] }}
-                            @endif
-                        </span>
-                        @endif
-                        @if($comment->type['comment_type']=='Cancelar')
-                        <span class="float-right bg-danger font-weight-bold" style="padding:5px;">
-                            @if(getRoles()['rol_admin'] || getRoles()['rol_mesa'])
-                            <a style="color:white" href="#" class="font-weight-bold">{{ $comment->type['comment_type'] }}</a>
-                            @else
-                            {{ $comment->type['comment_type'] }}
-                            @endif
-                        </span>
-                        @endif
-                        <label class="font-weight-bold" style="color:#154360;">
-                            {{ $comment->user['name'] }} {{ $comment->user['last_name1'] }} {{ $comment->user['last_name2'] }}
-                        </label>
-                        <br>
-                        {{ $comment->comment }}
-                        <br>
-                        <span class="float-right">{{ date_format(new \DateTime($comment->created_at), 'd-m-Y g:i A') }}</span>
-                        <br>
-                    </div>
-                    <br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-dark">
+                    <tr>
+                        <th>Autoriza</th>
+                        <th>Última fecha</th>
+                        <th>Nueva fecha</th>
+                    </tr>
+                    @foreach($reschedules as $reschedule)
+                    <tr>
+                        <td>{{ $reschedule->manager['name'] }} {{ $reschedule->manager['last_name1'] }} {{ $reschedule->manager['last_name2'] }}</td>
+                        <td>{{ date_format(new \DateTime($reschedule->last_date), 'd-m-Y g:i A') }}</td>
+                        <td>{{ date_format(new \DateTime($reschedule->new_date), 'd-m-Y g:i A') }}</td>
+                    </tr>
                     @endforeach
-                </div>
+                    @if(count($reschedules) <= 0)
+                    <tr><td colspan="3"><center>No existen reagendados</center></td></tr>
+                    @endif
+                </table>
             </div>
         </div>
     </div>
-    -->
 </div>
 @endsection
 @include('services.comment_box')

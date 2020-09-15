@@ -27,7 +27,7 @@
                         <span class="float-right bg-warning font-weight-bold" style="padding:5px;">
 
                             @if(getRoles()['rol_admin'] || getRoles()['rol_mesa'])
-                            <a style="color:white" href="#" class="font-weight-bold">{{ $comment->type['comment_type'] }}</a>
+                            <a style="color:white" href="{{ route('index_reschedule',$service->id) }}" class="font-weight-bold">{{ $comment->type['comment_type'] }}</a>
                             @else
                             {{ $comment->type['comment_type'] }}
                             @endif

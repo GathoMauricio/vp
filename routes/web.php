@@ -169,6 +169,11 @@ Route::middleware(['check_login'])->group(function () {
     //Insertar reemplazo
     Route::post('store_reemplazo','ReemplazoController@store')->name('store_reemplazo');
 
+    //Formulario para nuevo reagendado
+    Route::get('index_reschedule/{id}','RescheduleController@index')->name('index_reschedule');
+
+    //Almacenar un reagendado y actualizar servicio
+    Route::post('store_reschedule','RescheduleController@store')->name('store_reschedule');
 
 });
 
