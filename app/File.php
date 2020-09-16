@@ -27,6 +27,17 @@ class File extends Model
 			$query->user_id = Auth::user()->id;
 		});
     }
+    public function service()
+    {
+        return $this->belongsTo
+        (
+            'App\Service',
+            'service_id',
+            'id'
+            
+        )
+        ->withDefault();
+    }
     public function user()
     {
         return $this->belongsTo

@@ -397,35 +397,78 @@
     </div>
 </div>
 </div>
-<div class="row shadow p-3 mb-5 bg-white rounded">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h4>Reagendados</h4>
-                @php
-                $reschedules = App\Reschedule::where('service_id', $service->id)->get();
-                @endphp
+<div class="container">
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Reagendados</h4>
+                    @php
+                    $reschedules = App\Reschedule::where('service_id', $service->id)->get();
+                    @endphp
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark">
+                        <tr>
+                            <th>Autoriza</th>
+                            <th>Última fecha</th>
+                            <th>Nueva fecha</th>
+                        </tr>
+                        @foreach($reschedules as $reschedule)
+                        <tr>
+                            <td>{{ $reschedule->manager['name'] }} {{ $reschedule->manager['last_name1'] }} {{ $reschedule->manager['last_name2'] }}</td>
+                            <td>{{ date_format(new \DateTime($reschedule->last_date), 'd-m-Y g:i A') }}</td>
+                            <td>{{ date_format(new \DateTime($reschedule->new_date), 'd-m-Y g:i A') }}</td>
+                        </tr>
+                        @endforeach
+                        @if(count($reschedules) <= 0)
+                        <tr><td colspan="3"><center>No existen reagendados</center></td></tr>
+                        @endif
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-dark">
-                    <tr>
-                        <th>Autoriza</th>
-                        <th>Última fecha</th>
-                        <th>Nueva fecha</th>
-                    </tr>
-                    @foreach($reschedules as $reschedule)
-                    <tr>
-                        <td>{{ $reschedule->manager['name'] }} {{ $reschedule->manager['last_name1'] }} {{ $reschedule->manager['last_name2'] }}</td>
-                        <td>{{ date_format(new \DateTime($reschedule->last_date), 'd-m-Y g:i A') }}</td>
-                        <td>{{ date_format(new \DateTime($reschedule->new_date), 'd-m-Y g:i A') }}</td>
-                    </tr>
-                    @endforeach
-                    @if(count($reschedules) <= 0)
-                    <tr><td colspan="3"><center>No existen reagendados</center></td></tr>
-                    @endif
-                </table>
+    </div>
+</div>
+<div class="container">
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Retiro de equipo</h4>
+                    @php
+                    $retiros_equipos = App\RetiroEquipo::where('service_id', $service->id)->get();
+                    @endphp
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark">
+                        <tr>
+                            <th>Equipo</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>No. Serie</th>
+                            <th>Observaciones</th>
+                            <th>Firma</th>
+                        </tr>
+                        @foreach($retiros_equipos as $retiro_equipo)
+                        <tr>
+                            <td>{{ $retiro_equipo->equipo }}</td>
+                            <td>{{ $retiro_equipo->marca }}</td>
+                            <td>{{ $retiro_equipo->modelo }}</td>
+                            <td>{{ $retiro_equipo->serie }}</td>
+                            <td>{{ $retiro_equipo->observaciones }}</td>
+                            <td><img src="{{ asset('storage/') }}/{{ $retiro_equipo->firma }}" alt="{{ $retiro_equipo->firma }}"></td>
+                        </tr>
+                        @endforeach
+                        @if(count($retiros_equipos) <= 0)
+                        <tr><td colspan="6"><center>No existen registros</center></td></tr>
+                        @endif
+                    </table>
+                </div>
             </div>
         </div>
     </div>
