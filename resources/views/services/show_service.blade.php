@@ -211,6 +211,13 @@
                     <img src="{{ env('APP_URL').'/public/storage'.'/'.$service['firm'] }}" wicth="120" height="120">
                 </div>
                 @endif
+                @if(!empty($service['firm2']))
+                <div class="col-md-4">
+                    <label for="" class="font-weight-bold">Firma encargado</label>
+                    <br>
+                    <img src="{{ env('APP_URL').'/public/storage'.'/'.$service['firm2'] }}" wicth="120" height="120">
+                </div>
+                @endif
                 @if (getRoles()['rol_admin'] || getRoles()['rol_mesa'])
                 <div class="col-md-4">
                     <label for="" class="font-weight-bold">Método de pago</label>

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-class RetiroEquipoController extends Controller
+class ApiRetiroEquipoController extends Controller
 {
     public function index()
     {

@@ -19,10 +19,14 @@ Route::get('/login','ApiUserController@login')->name('login');
 Route::middleware('auth:api')->get('/index_service','ApiServiceController@index')->name('index_service');
 //Obtiene todos los datos de un servicio en particular
 Route::middleware('auth:api')->get('/show_service','ApiServiceController@show')->name('show_service');
-//Almacenar firma del usuario atendido
+//Almacenar firma del usuario final
 Route::middleware('auth:api')->post('/store_firma','ApiFirmaController@store')->name('store_firma');
 //Obtener firma del usuario_final
 Route::middleware('auth:api')->get('/show_firma','ApiFirmaController@show')->name('show_firma');
+//Almacenar firma del encargado
+Route::middleware('auth:api')->post('/store_firma2','ApiFirmaController@store2')->name('store_firma2');
+//Obtener firma del encargado
+Route::middleware('auth:api')->get('/show_firma2','ApiFirmaController@show2')->name('show_firma2');
 //Actualizar token FCM usuario
 Route::middleware('auth:api')->post('/update_fcm_token','ApiUserController@updateFcmToken')->name('update_fcm_token');
 //Subir evidencia camera

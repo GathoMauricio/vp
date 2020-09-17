@@ -43,10 +43,22 @@ class ApiFirmaController extends Controller
         $image = $request->firma;  // your base64 encoded
         $image = str_replace('data:image/png;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
-        $imageName = 'firma_'.$service->customer['code'].'_'.$report.'.'.'png';
-        //\File::put(storage_path(). '/' . $imageName, base64_decode($image));
+        $imageName = 'firma_final_user_'.$service->customer['code'].'_'.$report.'.'.'png';
         Storage::disk('local')->put($imageName,base64_decode($image));
         $service->firm = $imageName;
+        $service->save();
+        return $service;
+    }
+    public function store2(Request $request)
+    {
+        $service = Service::findOrFail($request->service_id);
+        $report = str_replace('/','-',$service->service_report);
+        $image = $request->firma;  // your base64 encoded
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = 'firma_encargado_'.$service->customer['code'].'_'.$report.'.'.'png';
+        Storage::disk('local')->put($imageName,base64_decode($image));
+        $service->firm2 = $imageName;
         $service->save();
         return $service;
     }
@@ -60,13 +72,13 @@ class ApiFirmaController extends Controller
     public function show(Request $request)
     {
         $service = Service::findOrFail($request->service_id);
-        //$path = storage_path('/').$service->firm;
         return env('APP_URL').'/public/storage'.'/'. $service->firm;
-        //Storage::disk('local')->path($service->firm);
-        //return $path;
-        
     }
-
+    public function show2(Request $request)
+    {
+        $service = Service::findOrFail($request->service_id);
+        return env('APP_URL').'/public/storage'.'/'. $service->firm2;
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -34,6 +34,7 @@ class Service extends Model
         'init_service',
         'end_service',
         'firm',
+        'firm2',
         'payment',
         'created_at',
         'updated_at'
