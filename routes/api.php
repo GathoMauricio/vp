@@ -53,6 +53,12 @@ Route::middleware('auth:api')->post('cancelar_servicio','ApiServiceController@ca
 Route::middleware('auth:api')->get('index_reemplazo','ApiReemplazoController@index')->name('index_reemplazo');
 //Almacenar firma del reemplazo
 Route::middleware('auth:api')->post('/store_firma_reemplazo','ApiReemplazoController@storeFirma')->name('store_firma_reemplazo');
+//Obtener retiros de equipo
+Route::middleware('auth:api')->get('index_retiro','ApiRetiroEquipoController@index')->name('index_retiro');
+//Almacenar firma del retiro
+Route::middleware('auth:api')->post('/store_firma_retiro','ApiRetiroEquipoController@storeFirma')->name('store_firma_retiro');
+//Crear registro de equipo
+Route::middleware('auth:api')->post('/store_retiro','ApiRetiroEquipoController@store')->name('store_retiro');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
