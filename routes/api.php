@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/index_service','ApiServiceController@index'
 Route::middleware('auth:api')->get('/show_service','ApiServiceController@show')->name('show_service');
 //Almacenar firma del usuario final
 Route::middleware('auth:api')->post('/store_firma','ApiFirmaController@store')->name('store_firma');
-//Obtener firma del usuario_final
+//Obtener firma del usuario final
 Route::middleware('auth:api')->get('/show_firma','ApiFirmaController@show')->name('show_firma');
 //Almacenar firma del encargado
 Route::middleware('auth:api')->post('/store_firma2','ApiFirmaController@store2')->name('store_firma2');
@@ -49,7 +49,10 @@ Route::middleware('auth:api')->put('finalizar_servicio','ApiServiceController@fi
 Route::middleware('auth:api')->post('reagendar_servicio','ApiServiceController@reagendarServicio')->name('reagendar_servicio');
 //Cancelar servicio
 Route::middleware('auth:api')->post('cancelar_servicio','ApiServiceController@cancelarServicio')->name('cancelar_servicio');
-
+//obtener reemplazos
+Route::middleware('auth:api')->get('index_reemplazo','ApiReemplazoController@index')->name('index_reemplazo');
+//Almacenar firma del reemplazo
+Route::middleware('auth:api')->post('/store_firma_reemplazo','ApiReemplazoController@storeFirma')->name('store_firma_reemplazo');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
