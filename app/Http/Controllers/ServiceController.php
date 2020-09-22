@@ -10,6 +10,7 @@ use App\Comment;
 use App\Mensaje;
 use App\File;
 use App\Reemplazo;
+use App\RetiroEquipo;
 use App\Http\Requests\ServiceRequest;
 use Auth;
 use DB;
@@ -253,16 +254,21 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
-        $reemplazosAux=[];
         foreach($reemplazos as $reemplazo)
         {
             if(!empty($reemplazo->firma))
             {
                 $reemplazo->firma = parseBase64(env('APP_URL').'/public/storage'.'/'.$reemplazo->firma);
             }
-            $reemplazosAux[] = $reemplazo;
         }
-        
+        $retiros = RetiroEquipo::where('service_id',$id)->get();
+        foreach($retiros as $retiro)
+        {
+            if(!empty($retiro->firma))
+            {
+                $retiro->firma = parseBase64(env('APP_URL').'/public/storage'.'/'.$retiro->firma);
+            }
+        }
 
         $logo_vp = parseBase64(public_path("img/completo.jpg"));
         $star = parseBase64(public_path("img/star.jpg"));
@@ -285,7 +291,8 @@ class ServiceController extends Controller
             'star_empty' => $star_empty,
             'final_user_firm' => $final_user_firm,
             'responsable_firm' => $responsable_firm,
-            'technical_firm' => $technical_firm
+            'technical_firm' => $technical_firm,
+            'retiros' => $retiros
             ]
         );
         return $pdf->stream($service->customer['code'].'_' . $service->service_report . '.pdf');

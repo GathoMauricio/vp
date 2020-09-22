@@ -344,7 +344,7 @@
                                 <td>{{ $reemplazo->otro }}</td>
                                 <td>${{ $reemplazo->costo }}</td>
                                 @if(!empty($reemplazo->firma))
-                                <td><img src="{{ parseBase64(env('APP_URL').'/public/storage'.'/'.$reemplazo->firma) }}" width="60" height="60"></td>
+                                <td><img src="{{ parseBase64(env('APP_URL').'/public/storage'.'/'.$reemplazo->firma) }}" width="80" height="80"></td>
                                 @else
                                 <td>No disponible</td>
                                 @endif
@@ -422,7 +422,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-dark">
+                    <table class="table table-striped">
                         <tr>
                             <th>Autoriza</th>
                             <th>Última fecha</th>
@@ -457,7 +457,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-dark">
+                    <table class="table table-striped">
                         <tr>
                             <th>Equipo</th>
                             <th>Marca</th>
@@ -473,7 +473,11 @@
                             <td>{{ $retiro_equipo->modelo }}</td>
                             <td>{{ $retiro_equipo->serie }}</td>
                             <td>{{ $retiro_equipo->observaciones }}</td>
-                            <td><img src="{{ asset('storage/') }}/{{ $retiro_equipo->firma }}" alt="{{ $retiro_equipo->firma }}"></td>
+                            @if(!empty($retiro_equipo->firma))
+                            <td><img src="{{ parseBase64(env('APP_URL').'/public/storage'.'/'.$retiro_equipo->firma) }}" width="80" height="80"></td>
+                            @else
+                            <td>No disponible</td>
+                            @endif
                         </tr>
                         @endforeach
                         @if(count($retiros_equipos) <= 0)

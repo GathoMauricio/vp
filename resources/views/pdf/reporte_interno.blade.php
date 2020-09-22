@@ -237,14 +237,21 @@
                     <th>Firma de Autorización.</th>
                 </tr>
             </thead>
+            @foreach($retiros as $retiro)
             <tr>
-                <td>Laptop</td>
-                <td>Toshiba</td>
-                <td>RT 5670 lA</td>
-                <td>KBL52551084548664646</td>
-                <td>El equipo tiene mancha en el lcd y rotas las bisagras, también falta una tecla.</td>
-                <td>img</td>
+                <td>{{ $retiro->equipo }}</td>
+                <td>{{ $retiro->marca }}</td>
+                <td>{{ $retiro->modelo }}</td>
+                <td>{{ $retiro->serie }}</td>
+                <td>{{ $retiro->observaciones }}</td>
+                @if(!empty($retiro->firma))
+                <td><img src="{{ $retiro->firma }}" width="80"
+                        height="80"></td>
+                @else
+                <td>No disponible</td>
+                @endif
             </tr>
+            @endforeach
         </table>
         <br>
         <span style="border: 2px solid #98ca48;float: right;font-size: 12px; padding: 10px;">
@@ -266,15 +273,14 @@
         <table style="width:100%;">
             <tr>
                 @for($i=1; $i<= ($service->rate / 2);$i++ )
-                <td width="20%">
-                    <center><img src="{{ $star }}" width="40" height="40"></center>
-                </td>
-                @endfor
-                @for($i=($service->rate/2); $i < 5;$i++ )
-                <td width="20%">
-                    <center><img src="{{ $star_empty }}" width="40" height="40"></center>
-                </td>
-                @endfor
+                    <td width="20%">
+                        <center><img src="{{ $star }}" width="40" height="40"></center>
+                    </td>
+                    @endfor
+                    @for($i=($service->rate/2); $i < 5;$i++ ) <td width="20%">
+                        <center><img src="{{ $star_empty }}" width="40" height="40"></center>
+                        </td>
+                        @endfor
             </tr>
         </table>
         <div class="title" style="text-align: left;">Recomendaciones u observaciones del Servicio:</div>
