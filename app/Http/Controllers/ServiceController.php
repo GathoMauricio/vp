@@ -253,7 +253,7 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
-        $pdf = \PDF::loadView('pdf.reporte_interno', 
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,
             'reemplazos' => $reemplazos
