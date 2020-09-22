@@ -43,7 +43,7 @@ class ApiFirmaController extends Controller
         $image = $request->firma;  // your base64 encoded
         $image = str_replace('data:image/png;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
-        $imageName = 'firma_final_user_'.$service->customer['code'].'_'.$report.'.'.'png';
+        $imageName = 'firma_final_user_'.$service->customer['code'].'_'.$report.'.'.'jpg';
         Storage::disk('local')->put($imageName,base64_decode($image));
         $service->firm = $imageName;
         $service->save();
@@ -56,7 +56,7 @@ class ApiFirmaController extends Controller
         $image = $request->firma;  // your base64 encoded
         $image = str_replace('data:image/png;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
-        $imageName = 'firma_encargado_'.$service->customer['code'].'_'.$report.'.'.'png';
+        $imageName = 'firma_encargado_'.$service->customer['code'].'_'.$report.'.'.'jpg';
         Storage::disk('local')->put($imageName,base64_decode($image));
         $service->firm2 = $imageName;
         $service->save();
