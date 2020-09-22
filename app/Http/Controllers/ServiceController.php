@@ -251,15 +251,28 @@ class ServiceController extends Controller
     }
     public function printSErviceFormat(Request $request, $id)
     {
+        $avatarUrl = public_path("img\logo_vp.png");
+        $arrContextOptions=array(
+                        "ssl"=>array(
+                            "verify_peer"=>false,
+                            "verify_peer_name"=>false,
+                        ),
+                    );
+        $type = pathinfo($avatarUrl, PATHINFO_EXTENSION);
+        $avatarData = file_get_contents($avatarUrl, false, stream_context_create($arrContextOptions));
+        $avatarBase64Data = base64_encode($avatarData);
+        $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
+        
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,
-            'reemplazos' => $reemplazos
+            'reemplazos' => $reemplazos,
+            'logo_vp' => $imageData
             ]
         );
-        return $pdf->stream($service->customer['code'].'_' . $service->service_report . '.pdf');
+        return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
     }
     public function editStatusService(Request $request, $id, $status)
     {
