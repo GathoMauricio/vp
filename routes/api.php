@@ -63,6 +63,10 @@ Route::middleware('auth:api')->post('/store_retiro','ApiRetiroEquipoController@s
 Route::middleware('auth:api')->get('/get_rate','ApiServiceController@getRate')->name('get_rate');
 //Calificar servicio 
 Route::middleware('auth:api')->post('/rate_service','ApiServiceController@rateService')->name('rate_service');
+//mostrar firma del ususario
+Route::middleware('auth:api')->get('/show_user_firm','ApiUserController@showFirm')->name('show_user_firm');
+//Actualizar firma del empleado
+Route::middleware('auth:api')->post('/update_my_firm','ApiUserController@updateFirm')->name('update_my_firm');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

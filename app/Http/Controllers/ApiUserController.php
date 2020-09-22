@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\User;
 use Hash;
 use Auth;
+use Storage;
 
 class ApiUserController extends Controller
 {
@@ -32,5 +33,23 @@ class ApiUserController extends Controller
         }else{
             return "Error al actualizar FCM Token";
         }
+    }
+    public function showFirm(Request $request)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        if(!empty($user->firm))
+        return env('APP_URL').'/public/storage'.'/'. $user->firm;
+        else return NULL;
+    }
+    public function updateFirm(Request $request){
+        $user = User::findOrFail(Auth::user()->id);
+        $image = $request->firma;  // your base64 encoded
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = 'firma_user_'.$user->id.'_.'.'png';
+        Storage::disk('local')->put($imageName,base64_decode($image));
+        $user->firm = $imageName;
+        $user->save();
+        return $user;
     }
 }
