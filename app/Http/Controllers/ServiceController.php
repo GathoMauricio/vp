@@ -263,6 +263,7 @@ class ServiceController extends Controller
         $avatarUrl = public_path("img/logo_vp.png");
         //$avatarUrl = $this->file_get_contents_curl($avatarUrl);
         //return $avatarUrl;
+        /*
         $arrContextOptions=array(
                         "ssl"=>array(
                             "verify_peer"=>false,
@@ -274,13 +275,14 @@ class ServiceController extends Controller
         $avatarBase64Data = base64_encode($avatarData);
         $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
         return $imageData;
+        */
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,
             'reemplazos' => $reemplazos,
-            'logo_vp' => $imageData
+            //'logo_vp' => $imageData
             ]
         );
         return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
