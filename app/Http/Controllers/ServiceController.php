@@ -249,17 +249,24 @@ class ServiceController extends Controller
             return "<option value>--Seleccione una opción--</option>";
         }
     }
-    public function file_get_contents_curl($url) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
-        curl_setopt($ch, CURLOPT_URL, $url);
-        $data = curl_exec($ch);
-        curl_close($ch);
+    public function parseBase64($image)
+    {
+        $image = public_path("img/completo.jpg");
+        $arrContextOptions=array(
+                        "ssl"=>array(
+                            "verify_peer"=>false,
+                            "verify_peer_name"=>false,
+                        ),
+                    );
+        $type = pathinfo($image, PATHINFO_EXTENSION);
+        $imageData = file_get_contents($image, false, stream_context_create($arrContextOptions));
+        $data64 = base64_encode($imageData);
+        $data = 'data:image/' . $type . ';base64,' . $data64;
         return $data;
     }
     public function printSErviceFormat(Request $request, $id)
     {
+        /*
         $avatarUrl = public_path("img/completo.jpg");
         $arrContextOptions=array(
                         "ssl"=>array(
@@ -271,14 +278,15 @@ class ServiceController extends Controller
         $avatarData = file_get_contents($avatarUrl, false, stream_context_create($arrContextOptions));
         $avatarBase64Data = base64_encode($avatarData);
         $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
-        
+        */
+        $logo_vp = $this->parseBase64(public_path("img/completo.jpg"));
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,
             'reemplazos' => $reemplazos,
-            'logo_vp' => $imageData
+            'logo_vp' => $logo_vp
             ]
         );
         return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
