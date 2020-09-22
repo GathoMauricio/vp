@@ -12,8 +12,8 @@
     <table class="table" style="width:100%;">
         <tr>
             <td width="20%">
-                <img src="{{public_path('\img\logo_vp.png')}}" style="width:160px;height:90px;">
-                {{public_path('\img\logo_vp.png')}}
+                <img src="{{public_path()}}\img\logo_vp.png" style="width:160px;height:90px;">
+                {{public_path()}}\img\logo_vp.png
             </td>
             <td width="80%">
                 <br>
