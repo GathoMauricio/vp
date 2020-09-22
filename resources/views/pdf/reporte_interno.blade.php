@@ -12,10 +12,9 @@
     <table class="table" style="width:100%;">
         <tr>
             <td width="20%">
-                <img src="{{ $logo_vp }}" style="width:160px;height:90px;">
+                <img src="{{ $logo_vp }}" style="width:180px;height:90px;">
             </td>
             <td width="80%">
-                <br>
                 <i class="float-right font-weight-bold" style="padding-right:20px;color:#98ca48;">"Que tus negocios no
                     se detengan".</i>
                 <br>
@@ -262,21 +261,23 @@
     </div>
     <br>
     <div class="zone">
-        <div class="title" style="text-align: left;">Calificación del Servicio</div>
+        <div class="title" style="text-align: left;">Calificación del Servicio: {{ $service->rate }}</div>
         <table style="width:100%;">
             <tr>
-                <td>
-                    <center><img src="{{public_path('img\icon_good.png')}}" width="40" height="40"></center>
+                @for($i=1; $i<= ($service->rate / 2);$i++ )
+                <td width="20%">
+                    <center><img src="{{ $star }}" width="40" height="40"></center>
                 </td>
-                <td>
-                    <center><img src="{{public_path('img\icon_regular.png')}}" width="40" height="40"></center>
+                @endfor
+                @for($i=($service->rate/2); $i < 5;$i++ )
+                <td width="20%">
+                    <center><img src="{{ $star_empty }}" width="40" height="40"></center>
                 </td>
-                <td>
-                    <center><img src="{{public_path('img\icon_bad.png')}}" width="40" height="40"></center>
-                </td>
+                @endfor
             </tr>
         </table>
         <div class="title" style="text-align: left;">Recomendación para mejora del Servicio:</div>
+        {{ $service->rate_comment }}
         <hr style="border:1px solid #98ca48;">
     </div>
     <table style="width:100%;">
