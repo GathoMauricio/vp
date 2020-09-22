@@ -260,7 +260,7 @@ class ServiceController extends Controller
     }
     public function printSErviceFormat(Request $request, $id)
     {
-        $avatarUrl = public_path("img/completo.png");
+        $avatarUrl = public_path("img/completo.jpg");
         $arrContextOptions=array(
                         "ssl"=>array(
                             "verify_peer"=>false,
