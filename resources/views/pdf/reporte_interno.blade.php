@@ -260,6 +260,7 @@
         informado al Cliente para aprobar su autorización.
     </div>
     <br>
+    @if(!empty($service->rate))
     <div class="zone">
         <div class="title" style="text-align: left;">Calificación del Servicio: {{ $service->rate }}</div>
         <table style="width:100%;">
@@ -276,23 +277,30 @@
                 @endfor
             </tr>
         </table>
-        <div class="title" style="text-align: left;">Recomendación para mejora del Servicio:</div>
+        <div class="title" style="text-align: left;">Recomendaciones u observaciones del Servicio:</div>
         {{ $service->rate_comment }}
         <hr style="border:1px solid #98ca48;">
     </div>
+    @endif
     <table style="width:100%;">
         <tr>
             <td><br><br><br>
                 <center>
-                    <hr style="border:1px solid #98ca48;">Firma de Usuario.</center>
+                    <img src="{{ $final_user_firm }}" width="80" height="80">
+                    <hr style="border:1px solid #98ca48;">Firma de Usuario.
+                </center>
             </td>
             <td><br><br><br>
                 <center>
-                    <hr style="border:1px solid #98ca48;">Firma de Responsable.</center>
+                    <img src="{{ $responsable_firm }}" width="80" height="80">
+                    <hr style="border:1px solid #98ca48;">Firma de Responsable.
+                </center>
             </td>
             <td><br><br><br>
                 <center>
-                    <hr style="border:1px solid #98ca48;">Firma de Técnico.</center>
+                    <img src="{{ $technical_firm }}" width="80" height="80">
+                    <hr style="border:1px solid #98ca48;">Firma de Técnico.
+                </center>
             </td>
         </tr>
         <tr>

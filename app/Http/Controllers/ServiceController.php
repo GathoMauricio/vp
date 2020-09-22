@@ -265,18 +265,31 @@ class ServiceController extends Controller
     }
     public function printSErviceFormat(Request $request, $id)
     {
+        $service = Service::findOrFail($id);
+        $reemplazos = Reemplazo::where('service_id',$id)->get();
+        
         $logo_vp = $this->parseBase64(public_path("img/completo.jpg"));
         $star = $this->parseBase64(public_path("img/star.jpg"));
         $star_empty = $this->parseBase64(public_path("img/star_empty.jpg"));
-        $service = Service::findOrFail($id);
-        $reemplazos = Reemplazo::where('service_id',$id)->get();
+        //firma del usuario final
+        if(!empty($service->firm)) $final_user_firm = $this->parseBase64(env('APP_URL').'/public/storage'.'/'.$service->firm);
+        else $final_user_firm = $this->parseBase64(public_path("img/no_disponible.jpg"));
+        //firma del responsable
+        if(!empty($service->firm2)) $responsable_firm = $this->parseBase64(env('APP_URL').'/public/storage'.'/'.$service->firm2);
+        else $responsable_firm = $this->parseBase64(public_path("img/no_disponible.jpg"));
+        //firma del empleado asignado
+        if(!empty($service->technical['firm'])) $technical_firm = $this->parseBase64(env('APP_URL').'/public/storage'.'/'.$service->technical['firm']);
+        else $technical_firm = $this->parseBase64(public_path("img/no_disponible.jpg"));
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,
             'reemplazos' => $reemplazos,
             'logo_vp' => $logo_vp,
             'star' => $star,
-            'star_empty' => $star_empty
+            'star_empty' => $star_empty,
+            'final_user_firm' => $final_user_firm,
+            'responsable_firm' => $responsable_firm,
+            'technical_firm' => $technical_firm
             ]
         );
         return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
