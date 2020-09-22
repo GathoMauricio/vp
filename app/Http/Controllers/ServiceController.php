@@ -259,7 +259,7 @@ class ServiceController extends Controller
             'reemplazos' => $reemplazos
             ]
         );
-        return $pdf->download($service->customer['code'].'_' . $service->service_report . '.pdf');
+        return $pdf->stream($service->customer['code'].'_' . $service->service_report . '.pdf');
     }
     public function editStatusService(Request $request, $id, $status)
     {
