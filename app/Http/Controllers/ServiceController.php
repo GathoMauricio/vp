@@ -262,7 +262,7 @@ class ServiceController extends Controller
         $avatarData = file_get_contents($avatarUrl, false, stream_context_create($arrContextOptions));
         $avatarBase64Data = base64_encode($avatarData);
         $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
-        
+        return $imageData;
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
