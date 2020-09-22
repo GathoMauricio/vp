@@ -318,7 +318,7 @@
             </form>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-dark">
+                    <table class="table table-striped">
                         <tr>
                             <th>Reemplazo</th>
                             <th>Marca</th>
@@ -344,7 +344,7 @@
                                 <td>{{ $reemplazo->otro }}</td>
                                 <td>${{ $reemplazo->costo }}</td>
                                 @if(!empty($reemplazo->firma))
-                                <td>{{ $reemplazo->firma }}</td>
+                                <td><img src="{{ parseBase64(env('APP_URL').'/public/storage'.'/'.$reemplazo->firma) }}" width="60" height="60"></td>
                                 @else
                                 <td>No disponible</td>
                                 @endif

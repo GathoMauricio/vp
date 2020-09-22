@@ -249,37 +249,33 @@ class ServiceController extends Controller
             return "<option value>--Seleccione una opción--</option>";
         }
     }
-    public function parseBase64($image)
-    {
-        $arrContextOptions=array(
-                        "ssl"=>array(
-                            "verify_peer"=>false,
-                            "verify_peer_name"=>false,
-                        ),
-                    );
-        $type = pathinfo($image, PATHINFO_EXTENSION);
-        $imageData = file_get_contents($image, false, stream_context_create($arrContextOptions));
-        $data64 = base64_encode($imageData);
-        $data = 'data:image/' . $type . ';base64,' . $data64;
-        return $data;
-    }
     public function printSErviceFormat(Request $request, $id)
     {
         $service = Service::findOrFail($id);
         $reemplazos = Reemplazo::where('service_id',$id)->get();
+        $reemplazosAux=[];
+        foreach($reemplazos as $reemplazo)
+        {
+            if(!empty($reemplazo->firma))
+            {
+                $reemplazo->firma = parseBase64(env('APP_URL').'/public/storage'.'/'.$reemplazo->firma);
+            }
+            $reemplazosAux[] = $reemplazo;
+        }
         
-        $logo_vp = $this->parseBase64(public_path("img/completo.jpg"));
-        $star = $this->parseBase64(public_path("img/star.jpg"));
-        $star_empty = $this->parseBase64(public_path("img/star_empty.jpg"));
+
+        $logo_vp = parseBase64(public_path("img/completo.jpg"));
+        $star = parseBase64(public_path("img/star.jpg"));
+        $star_empty = parseBase64(public_path("img/star_empty.jpg"));
         //firma del usuario final
-        if(!empty($service->firm)) $final_user_firm = $this->parseBase64(env('APP_URL').'/public/storage'.'/'.$service->firm);
-        else $final_user_firm = $this->parseBase64(public_path("img/no_disponible.jpg"));
+        if(!empty($service->firm)) $final_user_firm = parseBase64(env('APP_URL').'/public/storage'.'/'.$service->firm);
+        else $final_user_firm = parseBase64(public_path("img/no_disponible.jpg"));
         //firma del responsable
-        if(!empty($service->firm2)) $responsable_firm = $this->parseBase64(env('APP_URL').'/public/storage'.'/'.$service->firm2);
-        else $responsable_firm = $this->parseBase64(public_path("img/no_disponible.jpg"));
+        if(!empty($service->firm2)) $responsable_firm = parseBase64(env('APP_URL').'/public/storage'.'/'.$service->firm2);
+        else $responsable_firm = parseBase64(public_path("img/no_disponible.jpg"));
         //firma del empleado asignado
-        if(!empty($service->technical['firm'])) $technical_firm = $this->parseBase64(env('APP_URL').'/public/storage'.'/'.$service->technical['firm']);
-        else $technical_firm = $this->parseBase64(public_path("img/no_disponible.jpg"));
+        if(!empty($service->technical['firm'])) $technical_firm = parseBase64(env('APP_URL').'/public/storage'.'/'.$service->technical['firm']);
+        else $technical_firm = parseBase64(public_path("img/no_disponible.jpg"));
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,

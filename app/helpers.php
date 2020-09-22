@@ -1,6 +1,24 @@
 
 <?php
 
+if(! function_exists('parseBase64'))
+{
+    function parseBase64($image)
+    {
+        $arrContextOptions=array(
+                        "ssl"=>array(
+                            "verify_peer"=>false,
+                            "verify_peer_name"=>false,
+                        ),
+                    );
+        $type = pathinfo($image, PATHINFO_EXTENSION);
+        $imageData = file_get_contents($image, false, stream_context_create($arrContextOptions));
+        $data64 = base64_encode($imageData);
+        $data = 'data:image/' . $type . ';base64,' . $data64;
+        return $data;
+    }
+}
+
 if (! function_exists('current_user')) {
     function current_user()
     {

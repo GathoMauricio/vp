@@ -208,7 +208,7 @@
                 <td>{{ $reemplazo->otro }}</td>
                 <td>${{ $reemplazo->costo }}</td>
                 @if(!empty($reemplazo->firma))
-                <td>{{ $reemplazo->firma }}</td>
+                <td><img src="{{ $reemplazo->firma }}" width="60" height="60"></td>
                 @else
                 <td>No disponible</td>
                 @endif
