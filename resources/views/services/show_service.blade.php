@@ -124,7 +124,7 @@
                         @endif
 
 
-                        <a href="{{ route('formato_pdf_servicio',$service->id) }}" style="float:right;"
+                        <a href="{{ route('formato_pdf_servicio',$service->id) }}" target="_blank" style="float:right;"
                             class="btn btn-primary"><span class="icon icon-file-pdf"></span> Imprimir formato</a>
                 </div>
             </div>
