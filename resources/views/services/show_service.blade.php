@@ -18,8 +18,13 @@
     <div class="row shadow p-3 mb-5 bg-white rounded">
         <div class="container">
             <div class="row">
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 py-1" style="background-color: #EAECEE">
+                        @if(!empty($service->rate))
+                        <div class="float-right">
+                            <h5>{{ $service->rate }} <span class="icon-star-full" style="color:#F1C40F;"></span></h5>
+                            {{ $service->rate_comment }}
+                        </div>
+                        @endif
                         <h4>
                             Detalles del servicio {{ $service->service_report }} -
                             Prioridad

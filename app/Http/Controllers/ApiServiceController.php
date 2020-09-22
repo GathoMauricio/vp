@@ -352,4 +352,17 @@ class ApiServiceController extends Controller
             );
             return ['error' => 0 , 'msg' => 'La solicitud se envió con éxito'];
     }
+    public function getRate(Request $request)
+    {
+        return Service::findOrFail($request->service_id); 
+    }
+    public function rateService(Request $request)
+    {
+        $service = Service::findOrFail($request->service_id);
+        $service->rate = $request->rate;
+        $service->rate_comment = $request->rate_comment;
+        if($service->save())
+        return "Calificación agregada!";
+        else return "Error al agregar calificación.";
+    }
 }
