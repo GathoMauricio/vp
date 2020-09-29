@@ -52,20 +52,29 @@
                     </span>
                 </p>
             </a>
-            <a href="#">
+            <a href="{{ route('dashboard') }}">
                 <p style="cursor:pointer;">
                     <span class="icon-home">
                         <span style="display:none;" class="label-item-menu">
-                            Inicio
+                            Dashboard
                         </span>
                     </span>
                 </p>
             </a>
-            <a href="#">
+            <a href="{{ route('calendar') }}">
                 <p style="cursor:pointer;">
                     <span class="icon-calendar" id="item_calendar">
                         <span style="display:none;" class="label-item-menu">
                             Calendario
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="{{ route('create_service') }}">
+                <p style="cursor:pointer;">
+                    <span class="icon-file-empty" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Crear servicio
                         </span>
                     </span>
                 </p>

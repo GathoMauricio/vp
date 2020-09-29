@@ -49,7 +49,10 @@ class ServiceController extends Controller
         $services = Service::whereDate('schedule', Carbon::today())->where('technical_id', 0)->paginate(15);
         return view('services/_index_service', ['services' => $services, 'desc' => 'Este perfil no cuenta con ningun rol verifique con el administrador.']);
     }
-
+    Public function indexCalendar(Request $request)
+    {
+        return view('services/calendar');
+    }
     function searchService(Request $request)
     {
         $consulta = (new Service)->newQuery();

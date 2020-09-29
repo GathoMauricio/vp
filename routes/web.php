@@ -10,6 +10,8 @@ Route::middleware(['check_login'])->group(function () {
 
     //Retorna la vista principal del sistema en este caso los servicios
     Route::get('dashboard','ServiceController@index')->name('dashboard');
+    //Retorna la vista principal del calendario
+    Route::get('calendar','ServiceController@indexCalendar')->name('calendar');
     Route::get('index_ajax','ServiceController@indexAjax')->name('index_ajax');
     #RUTAS PARA USUARIOS
     //Retorna la lista de usuarios del sistema
