@@ -76,7 +76,7 @@ $(document).ready(function(){
     getSepomex($("#txt_cp_sepomex").val());
     getCustomerAddress($('#txt_customer_adress_id').val());
     $("#contenedor_mensajes").animate({ scrollTop: $('#contenedor_mensajes').prop("scrollHeight")},0);
-    //Pusher.logToConsole = true;
+    Pusher.logToConsole = true;
     var pusher = new Pusher('952d906c3edd3db0e583', {
       cluster: 'us2'
     });

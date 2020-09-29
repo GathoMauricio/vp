@@ -1,16 +1,35 @@
 
 <?php
-
-if(! function_exists('parseBase64'))
-{
+if (!function_exists('getFormatDate')) {
+    function getFormatDate($date)
+    {
+        $diassemanaN = array(
+            "Domingo", "Lunes", "Martes", "Miércoles",
+            "Jueves", "Viernes", "Sábado"
+        );
+        $mesesN = array(
+            1 => "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        );
+        return $diassemanaN[date_format(new \DateTime($date), 'N')] 
+        .' '.date_format(new \DateTime($date), 'd'). 
+        ' de '.
+        $mesesN[date_format(new \DateTime($date), 'n')].
+        ' del '.
+        date_format(new \DateTime($date), 'Y')
+        .' a las '.
+        date_format(new \DateTime($date),'g:i A');
+    }
+}
+if (!function_exists('parseBase64')) {
     function parseBase64($image)
     {
-        $arrContextOptions=array(
-                        "ssl"=>array(
-                            "verify_peer"=>false,
-                            "verify_peer_name"=>false,
-                        ),
-                    );
+        $arrContextOptions = array(
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ),
+        );
         $type = pathinfo($image, PATHINFO_EXTENSION);
         $imageData = file_get_contents($image, false, stream_context_create($arrContextOptions));
         $data64 = base64_encode($imageData);
@@ -19,33 +38,29 @@ if(! function_exists('parseBase64'))
     }
 }
 
-if (! function_exists('current_user')) {
+if (!function_exists('current_user')) {
     function current_user()
     {
         return auth()->user();
     }
 }
 
-if (! function_exists('getRoles')) {
+if (!function_exists('getRoles')) {
     function getRoles()
     {
-        $roles = App\UserRol::where('user_id',Auth::user()->id)->get();
-        $rol_admin=false;
-        $rol_mesa=false;
-        $rol_tec=false;
-        foreach($roles as $rol)
-        {
-            if($rol->rol_id==7)
-            {
-                $rol_admin=true;
+        $roles = App\UserRol::where('user_id', Auth::user()->id)->get();
+        $rol_admin = false;
+        $rol_mesa = false;
+        $rol_tec = false;
+        foreach ($roles as $rol) {
+            if ($rol->rol_id == 7) {
+                $rol_admin = true;
             }
-            if($rol->rol_id==6)
-            {
-                $rol_mesa=true;
+            if ($rol->rol_id == 6) {
+                $rol_mesa = true;
             }
-            if($rol->rol_id < 6)
-            {
-                $rol_tec=true;
+            if ($rol->rol_id < 6) {
+                $rol_tec = true;
             }
         }
         return [
@@ -55,8 +70,8 @@ if (! function_exists('getRoles')) {
         ];
     }
 }
-if (! function_exists('sendFcm')) {
-    function sendFcm($fcm_token,$title,$body,$service_id)
+if (!function_exists('sendFcm')) {
+    function sendFcm($fcm_token, $title, $body, $service_id)
     {
         $data = json_encode([
             "to" => $fcm_token,
@@ -77,7 +92,7 @@ if (! function_exists('sendFcm')) {
         //header with content_type api key
         $headers = array(
             'Content-Type:application/json',
-            'Authorization:key='.$server_key
+            'Authorization:key=' . $server_key
         );
         //CURL request to route notification to FCM connection server (provided by Google)
         $ch = curl_init();
