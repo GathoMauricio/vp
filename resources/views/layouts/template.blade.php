@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    @include('services.search_service_modal')
     <div class="contenedor_vp" style="width:100%;">
         <div class="container">
             <div class="row justify-content-center">
@@ -37,13 +38,32 @@
     </div>
 
     <div class="navigator">
-
         <img src="{{ asset('img/employee/employee.png') }}" width="50" height="50" class="float-right image-profile">
     </div>
     <div class="menu_vp">
-        <img src="{{ asset('img/completo.png') }}" width="90" height="50">
+        <a href="{{ route('dashboard') }}">
+            <img src="{{ asset('img/completo.png') }}" width="90" height="50">
+        </a>
         <div class="content_menu_vp">
-            <a href="#">
+            <a href="#" onclick="">
+                <p style="cursor:pointer;">
+                    <span class="icon-bubble">
+                        <span style="display:none;" class="label-item-menu">
+                            Mensajes
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="#" onclick="">
+                <p style="cursor:pointer;">
+                    <span class="icon-earth">
+                        <span style="display:none;" class="label-item-menu">
+                            Pendientes
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="#" onclick="buscadorServicios();">
                 <p style="cursor:pointer;">
                     <span class="icon-search">
                         <span style="display:none;" class="label-item-menu">
@@ -70,11 +90,58 @@
                     </span>
                 </p>
             </a>
+            @if(getRoles()['rol_admin'] || getRoles()['rol_mesa'])
             <a href="{{ route('create_service') }}">
                 <p style="cursor:pointer;">
                     <span class="icon-file-empty" id="item_calendar">
                         <span style="display:none;" class="label-item-menu">
                             Crear servicio
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="{{ route('create_customer') }}">
+                <p style="cursor:pointer;">
+                    <span class="icon-user-tie" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Crear cliente
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="{{ route('index_customer') }}">
+                <p style="cursor:pointer;">
+                    <span class="icon-address-book" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Lista de clientes
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="{{ route('create_user') }}">
+                <p style="cursor:pointer;">
+                    <span class="icon-user-plus" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Crear personal
+                        </span>
+                    </span>
+                </p>
+            </a>
+            <a href="{{ route('index_user') }}">
+                <p style="cursor:pointer;">
+                    <span class="icon-users" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Lista de personal
+                        </span>
+                    </span>
+                </p>
+            </a>
+            @endif
+            <a href="#">
+                <p style="cursor:pointer;">
+                    <span class="icon-cog" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Ajustes
                         </span>
                     </span>
                 </p>
