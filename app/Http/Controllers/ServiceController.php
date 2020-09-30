@@ -111,7 +111,7 @@ class ServiceController extends Controller
         $customers = Customer::all();
         $tipos_equipos = TipoEquipo::all();
         return view(
-            'services/create_service',
+            'services/_create_service',
             [
                 'servicesTypes' => $servicesTypes,
                 'customers' => $customers,
