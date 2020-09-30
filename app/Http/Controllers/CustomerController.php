@@ -31,7 +31,7 @@ class CustomerController extends Controller
     public function create()
     {
         $customersTypes = CustomerType::all(); 
-        return view('customer/create_customer',['customersTypes'=>$customersTypes]);
+        return view('customer/_create_customer',['customersTypes'=>$customersTypes]);
     }
 
     /**
