@@ -38,7 +38,7 @@
     </div>
 
     <div class="navigator">
-        <img src="{{ asset('img/employee/employee.png') }}" width="50" height="50" class="float-right image-profile">
+        <img src="{{ env('APP_URL').'/public/storage'.'/'.Auth::user()->image }}" width="80" height="80" class="float-right image-profile">
     </div>
     <div class="menu_vp">
         <a href="{{ route('dashboard') }}">
