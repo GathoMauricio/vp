@@ -1,6 +1,8 @@
 @extends('layouts.template')
 @section('content')
-<h3 class="title_page_vp">Se muestran los servicios del dia {{ date('d-m-Y') }}</h3>
+<h3 class="title_page_vp">Se muestran los servicios del dia {{ date('d-m-Y') }} 
+    {{ $services->links() }} <br>
+</h3>
 @if(count($services) <= 0) @include('layouts.no_records') @endif
 <div class="container">
     <div class="row py-1">
