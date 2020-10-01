@@ -3,7 +3,7 @@
 Auth::routes();
 //Rutas no autenticadas
 Route::get('/', function () {
-    return view('index');
+    return view('_index');
 })->middleware('guest');
 //Rutas autenticadas
 Route::middleware(['check_login'])->group(function () {
