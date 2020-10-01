@@ -20,7 +20,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::paginate(15);
-        return view('customer/index_customer',['customers'=>$customers]);
+        return view('customer/_index_customer',['customers'=>$customers]);
     }
 
     /**
@@ -45,14 +45,14 @@ class CustomerController extends Controller
         $customer = Customer::create($request->all());
         if($customer)
         {
-            FinalUser::create([
+            $FinalUser = FinalUser::create([
                 'customer_id'=>$customer->id,
-                'name'=>$customer->responsable_name,
-                'last_name1'=>$customer->responsable_last_name1,
-                'last_name2'=>$customer->responsable_last_name2,
+                'name'=>$request->responsable_name,
+                'last_name1'=>$request->responsable_last_name1,
+                'last_name2'=>$request->responsable_last_name2,
                 'email'=>$customer->email,
                 'phone'=>$customer->phone,
-                //'extension',
+                'extension'=>$customer->extension,
                 'area_descripcion'=>'Responsable',
                 'cp'=>$customer->cp,
                 'asentamiento'=>$customer->asentamiento,
@@ -63,7 +63,8 @@ class CustomerController extends Controller
                 'piso'=>$customer->piso,
                 'interior'=>$customer->interior
             ]);
-
+            $customer->responsable_id = $FinalUser->id;
+            $customer->save();
             if(isset($request->image))
             {
                 $file = $request->file('image');

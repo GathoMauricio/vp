@@ -11,13 +11,12 @@ class Customer extends Model
 	public $timestamps = true;
 
     protected $fillable = [
+        'id',
         'customer_type_id',
+        'responsable_id',
         'name',
         'code',
         'rfc',
-        'responsable_name',
-        'responsable_last_name1',
-        'responsable_last_name2',
         'phone',
         'email',
         'cp',
@@ -37,6 +36,17 @@ class Customer extends Model
         (
             'App\CustomerType',
             'customer_type_id',
+            'id'
+            
+        )
+        ->withDefault();
+    }
+    public function responsable()
+    {
+        return $this->belongsTo
+        (
+            'App\FinalUser',
+            'responsable_id',
             'id'
             
         )
