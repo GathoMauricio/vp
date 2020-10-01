@@ -200,7 +200,8 @@
         }
 
         .contenedor_vp {
-            padding: 80px;
+            padding-left: 20px;
+            padding-top: 40px;
         }
 
         .principal-container-vp {
@@ -209,6 +210,11 @@
             padding: 25px;
             overflow: hidden;
             overflow-y: auto;
+            border-radius:5px;
+            border: solid 1px #87c91f;
+            -webkit-box-shadow: 0px 2px 18px 2px rgba(135,201,31,1);
+            -moz-box-shadow: 0px 2px 18px 2px rgba(135,201,31,1);
+            box-shadow: 0px 2px 18px 2px rgba(135,201,31,1);
         }
 
         .sin-registros {
