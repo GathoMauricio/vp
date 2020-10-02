@@ -95,7 +95,7 @@ class UserController extends Controller
         $user = User::findOrfail($id);
         $roles = Rol::all();
         $usersRoles = UserRol::where('user_id',$id)->get();
-        return view('user/edit_user',['user'=>$user,'roles'=>$roles,'usersRoles'=>$usersRoles]);
+        return view('user/_edit_user',['user'=>$user,'roles'=>$roles,'usersRoles'=>$usersRoles]);
     }
 
     /**
@@ -134,7 +134,7 @@ class UserController extends Controller
     public function confirm(Request $request,$id)
     {
         $user = User::findOrfail($id);
-        return view('user/confirm_user',['user'=>$user]);
+        return view('user/_confirm_user',['user'=>$user]);
     }
     /**
      * Remove the specified resource from storage.
@@ -164,7 +164,7 @@ class UserController extends Controller
     public function editPwd(Request $request,$id)
     {
         $user = User::findOrfail($id);
-        return view('user/edit_pwd_user',['user'=>$user]);
+        return view('user/_edit_pwd_user',['user'=>$user]);
     }
 
     /**
