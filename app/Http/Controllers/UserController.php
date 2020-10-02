@@ -35,7 +35,7 @@ class UserController extends Controller
     public function create()
     {
         $rols = Rol::all();
-        return view('user/create_user',['rols'=>$rols]);
+        return view('user/_create_user',['rols'=>$rols]);
     }
 
     /**
