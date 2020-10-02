@@ -74,7 +74,7 @@ class ServiceController extends Controller
             $consulta->orderBy('schedule','desc');
             $consulta
             ->with('customer');
-            return view('services.result_search_service',['services' => $consulta->get()]);
+            return view('services._result_search_service',['services' => $consulta->paginate(15)]);
         }
         if (getRoles()['rol_mesa'] && getRoles()['rol_tec']) {
             $consulta
@@ -83,7 +83,7 @@ class ServiceController extends Controller
             $consulta->orderBy('schedule','desc');
             $consulta
             ->with('customer');
-            return view('services.result_search_service',['services' => $consulta->get()]);
+            return view('services._result_search_service',['services' => $consulta->paginate(15)]);
         }
         if (getRoles()['rol_mesa']) {
             $consulta
@@ -91,7 +91,7 @@ class ServiceController extends Controller
             $consulta->orderBy('schedule','desc');
             $consulta
             ->with('customer');
-            return view('services.result_search_service',['services' => $consulta->get()]);
+            return view('services._result_search_service',['services' => $consulta->paginate(15)]);
         }
         if (getRoles()['rol_tec']) {
             $consulta
@@ -99,7 +99,7 @@ class ServiceController extends Controller
             $consulta->orderBy('schedule','desc');
             $consulta
             ->with('customer');
-            return view('services.result_search_service',['services' => $consulta->get()]);
+            return view('services._result_search_service',['services' => $consulta->paginate(15)]);
         }
     }
 
