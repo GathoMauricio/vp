@@ -90,7 +90,7 @@ class CustomerController extends Controller
     {
         $finalUsers = FinalUser::where('customer_id',$id)->get();
         $customer = Customer::findOrFail($id);
-        return view('customer/show_customer',['customer'=>$customer,'finalUsers'=>$finalUsers]);
+        return view('customer/_show_customer',['customer'=>$customer,'finalUsers'=>$finalUsers]);
     }
 
     /**
@@ -103,7 +103,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $customersTypes = CustomerType::all();
-        return view('customer/edit_customer',['customer'=>$customer,'customersTypes'=>$customersTypes]);
+        return view('customer/_edit_customer',['customer'=>$customer,'customersTypes'=>$customersTypes]);
     }
 
     /**
@@ -130,7 +130,7 @@ class CustomerController extends Controller
     public function confirm(Request $request,$id)
     {
         $customer = Customer::findOrfail($id);
-        return view('customer/confirm_customer',['customer'=>$customer]);
+        return view('customer/_confirm_customer',['customer'=>$customer]);
     }
 
     /**

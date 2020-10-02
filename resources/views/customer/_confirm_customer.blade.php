@@ -1,10 +1,9 @@
-@extends('layouts.metadata')
+@extends('layouts.template')
 @section('content')
-@include('layouts.navbar')
+<h3 class="title_page_vp">
+    Eliminar cliente
+</h3>
 <div class="container">
-    <div class="row shadow p-3 mb-5 bg-white rounded">
-        <h4>Eliminar cliente</h4>
-    </div>
     <div class="row shadow p-3 mb-5 bg-white rounded">
         <h5>
             <img src="{{ asset('storage/') }}/{{$customer->image}}" alt="{{ asset('storage/') }}/{{$customer->image}}" width="100" height="100" style="border-radius:150px;">
