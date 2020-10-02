@@ -66,9 +66,9 @@
                 <td>Responsable.</td>
                 <td>
                     <b>
-                        {{ $service->customer['responsable_name'] }}
-                        {{ $service->customer['responsable_last_name1'] }}
-                        {{ $service->customer['responsable_last_name2'] }}
+                        {{ $service->customer->responsable['name'] }} 
+                        {{ $service->customer->responsable['last_name1'] }} 
+                        {{ $service->customer->responsable['last_name2'] }} 
                     </b>
                 </td>
             </tr>
