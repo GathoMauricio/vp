@@ -81,7 +81,7 @@ class UserController extends Controller
     {
         $usersRoles = UserRol::where('user_id',$id)->get();
         $user = User::findOrfail($id);
-        return view('user/show_user',['user'=>$user,'usersRoles'=>$usersRoles]);
+        return view('user/_show_user',['user'=>$user,'usersRoles'=>$usersRoles]);
     }
 
     /**
