@@ -1,4 +1,6 @@
 <?php
+#TEMP
+Route::get('amongus', function(){ return view('amongus'); })->name('amongus');
 //Rutas de autenticación
 Auth::routes();
 //Rutas no autenticadas
