@@ -48,10 +48,7 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Publicidad</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLabel">Espere un momento <span id="span_counter"></span>  </h5>
                 </div>
                 <div class="modal-body" id="modal_body">
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -71,10 +68,28 @@
             }
         </style>
         <script>
+            let counter = 30;
             $(document).ready( function() {
-               $('#modal').modal();
+            $('#span_counter').text(counter);
+               $('#modal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
                (adsbygoogle = window.adsbygoogle || []).push({});
+               timeOut();
             });
+            function timeOut() {
+                if(counter > 0)
+                {
+                    setTimeout(function(){
+                        counter = counter - 1;
+                        $('#span_counter').text(counter);
+                        timeOut();
+                    },1000);
+                }else{
+                    $('#modal').modal('hide');
+                }
+            }
         </script>
 </body>
 
