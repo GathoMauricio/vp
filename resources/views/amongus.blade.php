@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="{{ asset('img/among-us.png') }}" type="image/png">
     <link rel="icon" href="{{ asset('img/among-us.png') }}" type="image/png">
+    <script data-ad-client="ca-pub-4747161271433972" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
     <div style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);">
@@ -35,6 +36,5 @@
             background:url({{ asset('img/amongus.jpg')}});
         }
     </style>
-    <script data-ad-client="ca-pub-4747161271433972" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 </html>
