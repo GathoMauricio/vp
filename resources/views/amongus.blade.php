@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="{{ asset('img/among-us.png') }}" type="image/png">
     <link rel="icon" href="{{ asset('img/among-us.png') }}" type="image/png">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script data-ad-client="ca-pub-4747161271433972" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
@@ -35,23 +37,45 @@
                             <!-- Among us -->
                             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4747161271433972"
                                 data-ad-slot="2068655793" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Publicidad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" id="modal_body">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Among us -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4747161271433972"
+                                data-ad-slot="2068655793" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+            </div>
+        </div>
         <style>
             body {
-                background:url({{ asset('img/amongus.jpg')
+                background:url({{asset('img/amongus.jpg')}});
             }
-            }
-
-            );
+            #modal_body{
+                height:200px;
             }
         </style>
+        <script>
+            $(document).ready( function() {
+               $('#modal').modal();
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            });
+        </script>
 </body>
 
 </html>
