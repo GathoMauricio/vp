@@ -22,6 +22,8 @@
         <!--Icons-->
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+        <!--AdSense Script-->
+        <script data-ad-client="ca-pub-4747161271433972" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     </head>
 <body>
     <div class="contenedor_vp" style="width:100%;">

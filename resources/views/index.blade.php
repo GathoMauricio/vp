@@ -1,5 +1,3 @@
-<!--AdSense Script-->
-<script data-ad-client="ca-pub-4747161271433972" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 @extends('layouts.metadata')
 @section('content')
 <div style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);">
