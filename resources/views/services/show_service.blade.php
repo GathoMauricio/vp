@@ -251,6 +251,7 @@
                             {{ date_format(new \DateTime($service->created_at), 'd-m-Y g:i A') }}
                             y actualizado por última vez el
                             {{ date_format(new \DateTime($service->updated_at), 'd-m-Y g:i A') }}
+                            <a href="{{ route('confirm_service',$service->id) }}" style="color:red;">[Eliminar servicio]</a>
                         </b>
                     </small>
                 </div>

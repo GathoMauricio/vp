@@ -11,6 +11,8 @@ use App\Mensaje;
 use App\File;
 use App\Reemplazo;
 use App\RetiroEquipo;
+use App\Producto;
+use App\Reschedule;
 use App\Http\Requests\ServiceRequest;
 use Auth;
 use DB;
@@ -210,7 +212,19 @@ class ServiceController extends Controller
     {
         //
     }
-
+    /**
+     * Confirm to Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirm($id)
+    {
+        $service = Service::findOrFail($id);
+        return view('services.confirm_service', [
+            'service' => $service,
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -219,7 +233,15 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::where('service_id', $id)->delete();
+        File::where('service_id', $id)->delete();
+        Mensaje::where('service_id', $id)->delete();
+        Producto::where('service_id', $id)->delete();
+        Reemplazo::where('service_id', $id)->delete();
+        Reschedule::where('service_id', $id)->delete();
+        RetiroEquipo::where('service_id', $id)->delete();
+        Service::where('id',$id)->delete();
+        return redirect('dashboard');
     }
 
     public function loadEmployees(Request $request)
@@ -230,7 +252,7 @@ class ServiceController extends Controller
             ON u.id = ur.user_id 
             LEFT JOIN roles r 
             ON r.id = ur.rol_id 
-            WHERE r.id = '$request->value'
+            WHERE r.id = '$request->value' AND status_id = 1
             ");
             $html = "<option value>--Seleccione una opción--</option>";
             for ($i = 0; $i < count($empleados); $i++) {

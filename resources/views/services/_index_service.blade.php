@@ -23,22 +23,22 @@
                 - {{ $service->service_type['service_type'] }}
             </h6>
             <h6 style="color:#6A6A6A;font-weight: bold;">Asignado por 
-                <a href="#" class="user_span_preview">
+                <a href="{{ route('show_user',$service->manager_id) }}" class="user_span_preview">
                     {{ $service->manager['name'] }} 
                     {{ $service->manager['last_name1'] }} 
                     {{ $service->manager['last_name2'] }}
                 </a> 
                 para 
-                <a href="#" class="user_span_preview">
+                <a href="{{ route('show_user',$service->technical_id) }}" class="user_span_preview">
                     {{ $service->technical['name'] }} 
                     {{ $service->technical['last_name1'] }} 
                     {{ $service->technical['last_name2'] }}
                 </a> 
             </h6>
             <h6 class="font-weight-bold">
-                <a href="#" class="user_span_preview">{{ $service->customer['name'] }} </a>
+                <a href="{{ route('show_customer',$service->customer['id']) }}" class="user_span_preview">{{ $service->customer['name'] }} </a>
                 <span class="icon-play3" style="color:#6A6A6A;"></span> 
-                <a href="#" class="user_span_preview">{{ $service->usuario_Final['name'] }} {{ $service->usuario_Final['last_name1'] }} {{ $service->usuario_Final['last_name2'] }}</a>
+                <a href="{{ route('show_final_user',$service->usuario_Final['id']) }}" class="user_span_preview">{{ $service->usuario_Final['name'] }} {{ $service->usuario_Final['last_name1'] }} {{ $service->usuario_Final['last_name2'] }}</a>
             </h6>
             <p style="color:#2d3323;">
                 <img src="{{ env('APP_URL').'/public/storage'.'/'.$service->customer['image'] }}" width="80" height="80" class="py1">
@@ -46,6 +46,7 @@
                 {{ $service->description }}
             </p>
             <span class="float-right font-weight-bold">Programado para el: {{ getFormatDate($service->schedule) }}</span>
+                <!--
                 <form action="">
                     <input type="text" class="form-control" placeholder="Escriba su comentario aquí...">
                 </form>
@@ -66,6 +67,7 @@
                     <br>
                     @endforeach
                 </div>
+                -->
         </div>
         @endforeach
     </div>

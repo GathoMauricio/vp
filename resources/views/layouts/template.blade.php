@@ -47,6 +47,7 @@
             <img src="{{ asset('img/completo.png') }}" width="90" height="50">
         </a>
         <div class="content_menu_vp">
+            <!--
             <a href="#" onclick="">
                 <p style="cursor:pointer;">
                     <span class="icon-bubble">
@@ -65,6 +66,7 @@
                     </span>
                 </p>
             </a>
+        -->
             <a href="#" onclick="buscadorServicios();">
                 <p style="cursor:pointer;">
                     <span class="icon-search">
@@ -139,11 +141,26 @@
                 </p>
             </a>
             @endif
+            <!--
             <a href="#">
                 <p style="cursor:pointer;">
                     <span class="icon-cog" id="item_calendar">
                         <span style="display:none;" class="label-item-menu">
                             Ajustes
+                        </span>
+                    </span>
+                </p>
+            </a>
+            -->
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <p style="cursor:pointer;">
+                    <span class="icon-exit" id="item_calendar">
+                        <span style="display:none;" class="label-item-menu">
+                            Cerrar sesión
                         </span>
                     </span>
                 </p>
