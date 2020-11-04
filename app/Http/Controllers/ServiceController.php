@@ -290,6 +290,7 @@ class ServiceController extends Controller
                 $reemplazo->firma = parseBase64(env('APP_URL').'/public/storage'.'/'.$reemplazo->firma);
             }
         }
+        return $reemplazos;
         $retiros = RetiroEquipo::where('service_id',$id)->get();
         foreach($retiros as $retiro)
         {
