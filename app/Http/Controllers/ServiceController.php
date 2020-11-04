@@ -312,14 +312,14 @@ class ServiceController extends Controller
         //firma del empleado asignado
         if(!empty($service->technical['firm'])) $technical_firm = parseBase64(env('APP_URL').'/public/storage'.'/'.$service->technical['firm']);
         else $technical_firm = parseBase64(public_path("img/no_disponible.jpg"));
-        
+        /*
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.test', 
         [
             'technical_firm' => $technical_firm
         ]
         );
         return $pdf->stream($service->customer['code'].'_' . $service->service_report . '.pdf');
-        
+        */
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.reporte_interno', 
         [
             'service' => $service,
