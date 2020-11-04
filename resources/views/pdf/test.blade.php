@@ -1,5 +1,6 @@
+<div style="padding:5px;background:#98ca48;">
 <img src="{{ base64_to_jpeg($technical_firm,'jpg') }}" width="80" height="80">
-
+</div>
 
 @php
 function base64_to_jpeg($base64_string, $output_file) { 
