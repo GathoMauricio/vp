@@ -1,7 +1,7 @@
-@foreach($retiros as $retiro)
-imagen
-<img src="{{ base64_to_jpeg($retiro->firma,'jpg') }}" width="80" height="80"><br>
-@endforeach
+
+<img src="{{ base64_to_jpeg($technical_firm,'jpg') }}" width="80" height="80">
+<br>
+{{ base64_to_jpeg($technical_firm,'jpg') }}
 
 
 @php
