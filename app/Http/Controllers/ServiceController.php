@@ -299,12 +299,6 @@ class ServiceController extends Controller
                 $retiro->firma = parseBase64(env('APP_URL').'/public/storage'.'/'.$retiro->firma);
             }
         }
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.test', 
-        [
-            'retiros' => $retiros
-        ]
-        );
-        return $pdf->stream($service->customer['code'].'_' . $service->service_report . '.pdf');
 
         $logo_vp = parseBase64(public_path("img/completo.jpg"));
         $star = parseBase64(public_path("img/star.jpg"));
