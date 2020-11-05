@@ -5,7 +5,7 @@ Route::get('amongus', function(){ return view('amongus'); })->name('amongus');
 Auth::routes();
 //Rutas no autenticadas
 Route::get('/', function () {
-    return view('_index');
+    return view('_index_pendiente');
 })->middleware('guest');
 //Rutas autenticadas
 Route::middleware(['check_login'])->group(function () {
@@ -160,6 +160,9 @@ Route::middleware(['check_login'])->group(function () {
 
     //Cargar todos los pendientes
     Route::get('index_pendiente','PendienteController@index')->name('index_pendiente');
+
+    //Cargar todos los pendientes desde menu
+    Route::get('_index_pendiente','PendienteController@index_pendiente_menu')->name('_index_pendiente');
 
     //Obtener bitacora ajax
     Route::get('get_bitacora_ajax','BitacoraController@getBitacoraAjax')->name('get_bitacora_ajax');

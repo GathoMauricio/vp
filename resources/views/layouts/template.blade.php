@@ -43,7 +43,7 @@
         <img src="{{ env('APP_URL').'/public/storage'.'/'.Auth::user()->image }}" width="80" height="80" class="float-right image-profile">
     </div>
     <div class="menu_vp">
-        <a href="{{ route('dashboard') }}">
+        <a href="{{ route('_index_pendiente') }}">
             <img src="{{ asset('img/completo.png') }}" width="90" height="50">
         </a>
         <div class="content_menu_vp">
@@ -66,7 +66,8 @@
                     </span>
                 </p>
             </a>
-            <a href="#" onclick="">
+            -->    
+            <a href="{{ route('_index_pendiente') }}" onclick="">
                 <p style="cursor:pointer;">
                     <span class="icon-earth">
                         <span style="display:none;" class="label-item-menu">
@@ -75,7 +76,6 @@
                     </span>
                 </p>
             </a>
-        -->
             <a href="#" onclick="buscadorServicios();">
                 <p style="cursor:pointer;">
                     <span class="icon-search">

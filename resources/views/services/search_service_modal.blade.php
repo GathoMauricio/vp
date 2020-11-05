@@ -40,8 +40,21 @@
                                 <input type="hidden" id="ruta_cargar_usuario_final"
                                 value="{{ route('cargar_usuario_final') }}">
                                 <label class="font-weight-bold">Usuario final</label>
-                                <select id="cbo_usuario_final_search"  name="final_user_id" type="date" class="form-control">
+                                <select id="cbo_usuario_final_search"  name="final_user_id" class="form-control">
                                     <option value>--Seleccione una opción--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="hidden" id="ruta_cargar_usuario_final"
+                                value="{{ route('cargar_usuario_final') }}">
+                                <label class="font-weight-bold">Estatus</label>
+                                <select name="status_service_id" class="form-control">
+                                    <option value>--Seleccione una opción--</option>
+                                    <option value="1">Pendientes</option>
+                                    <option value="2">Enproceso</option>
+                                    <option value="3">Finalizados</option>
                                 </select>
                             </div>
                         </div>

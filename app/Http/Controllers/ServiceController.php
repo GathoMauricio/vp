@@ -71,6 +71,9 @@ class ServiceController extends Controller
         $consulta->when(!empty($request->final_user_id), function ($query) use ($request) {
 			return $query->where('final_user_id',$request->final_user_id);
         });
+        $consulta->when(!empty($request->status_service_id), function ($query) use ($request) {
+			return $query->where('status_service_id',$request->status_service_id);
+        });
         if (getRoles()['rol_admin']) {
             //Sin condición
             $consulta->orderBy('schedule','desc');
