@@ -196,3 +196,6 @@ Route::get('servicio', function(){
 })->name('servicio');
 
 Route::get('template', function(){ return view('template.index');  })->name('template');
+Route::get('php',function(){
+    return phpinfo();
+})->name('php');
