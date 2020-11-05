@@ -63,6 +63,14 @@
                     <a href="{{ route('show_customer',$finalUser->customer_id) }}" class="btn btn-block" style="background-color: #EAECEE">Cancelar</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <a href="{{ route('create_final_user',$finalUser->customer_id) }}" class="btn btn-block" style="background-color: #3498DB;color:white;">
+                        Agregar otro ususario final para {{ $finalUser->customer['name'] }}
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
