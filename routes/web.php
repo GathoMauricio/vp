@@ -194,8 +194,3 @@ Route::get('servicio', function(){
         'reemplazos' => \App\Reemplazo::where('service_id',2)->get()
         ]);
 })->name('servicio');
-
-Route::get('template', function(){ return view('template.index');  })->name('template');
-Route::get('php',function(){
-    return phpinfo();
-})->name('php');
