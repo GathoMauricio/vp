@@ -3,7 +3,9 @@
 <h3 class="title_page_vp">Pendientes
     {{ $services->links() }}
 </h3>
-@if(count($services) <= 0) @include('layouts.no_records') @endif
+@if(count($services) <= 0) 
+@include('layouts.no_records') 
+@else
 <div class="container">
     <div class="row py-1">
         <table class="table table-bordered">
@@ -26,4 +28,5 @@
         </table>
     </div>
 </div>
+@endif
 @endsection
