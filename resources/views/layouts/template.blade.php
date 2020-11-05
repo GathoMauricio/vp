@@ -47,6 +47,15 @@
             <img src="{{ asset('img/completo.png') }}" width="90" height="50">
         </a>
         <div class="content_menu_vp">
+            <a href="#" onclick="">
+                <p style="cursor:pointer;">
+                    <span class="icon-user">
+                        <span style="display:none;" class="label-item-menu">
+                            {{ Auth::user()->name }} {{ Auth::user()->last_name1 }} {{ Auth::user()->last_name2 }}
+                        </span>
+                    </span>
+                </p>
+            </a>
             <!--
             <a href="#" onclick="">
                 <p style="cursor:pointer;">
