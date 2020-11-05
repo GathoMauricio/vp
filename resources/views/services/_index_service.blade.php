@@ -8,9 +8,40 @@
     <div class="row py-1">
         @foreach($services as $service)
         <div class="col-md-12 py-3 item-service">
-            <span class="float-right font-weight-bold status-theme">
+            @if($service->status_service_id == 1)
+            <span style="background-color: #D6DBDF;color:black;" class="float-right font-weight-bold status-theme">
                 {{ $service->status['status_service'] }}
             </span>
+            @endif
+            @if($service->status_service_id == 2)
+            <span style="background-color: #F39C12;color:white;" class="float-right font-weight-bold status-theme">
+                {{ $service->status['status_service'] }}
+            </span>
+            @endif
+            @if($service->status_service_id == 3)
+            <span style="background-color: #2ECC71;color:white;" class="float-right font-weight-bold status-theme">
+                {{ $service->status['status_service'] }}
+            </span>
+            @endif
+            @if($service->status_service_id == 5)
+            <span style="background-color: #E74C3C;color:white;" class="float-right font-weight-bold status-theme">
+                {{ $service->status['status_service'] }}
+            </span>
+            @endif
+
+            @if(getRoles()['rol_admin'] || getRoles()['rol_mesa'])
+                @if($service->status_service_id > 5)
+                <span style="background-color: #F4D03F;color:white;" class="float-right font-weight-bold status-theme">
+                    {{ $service->status['status_service'] }}
+                </span>
+                @endif 
+            @else 
+            <span style="background-color: #2ECC71;color:white;" class="float-right font-weight-bold status-theme">
+                Finalizado
+            </span>
+            @endif
+
+
             <span class="float-right" style="padding:15px;padding-top:10px;">
                 <a href="{{ route('formato_pdf_servicio',$service->id) }}"target="_blank" class="btn btn-danger">
                     <span class="icon-file-pdf"></span>
