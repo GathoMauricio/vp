@@ -21,28 +21,28 @@ class PendienteController extends Controller
     public function index_pendiente_menu(Request $request)
     {
         if (getRoles()['rol_admin']) {
-            $services = Service::where('status_service_id',2)->
+            $services = Service::where('status_service_id',1)->
                 paginate(15);
             return view('services/_index_pendiente', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de administrador por lo tanto se muestran todos los servicios existentes.']);
         }
         if (getRoles()['rol_mesa'] && getRoles()['rol_tec']) {
-            $services = Service::where('status_service_id',2)->
+            $services = Service::where('status_service_id',1)->
             where('manager_id', Auth::user()->id)
                 ->orWhere('technical_id', Auth::user()->id)
                 ->paginate(15);
             return view('services/_index_pendiente', ['services' => $services, 'desc' => 'Este perfil cuenta tanto con rol de mesa de ayuda como de técnico se muestran tanto los servicios levantados como asignanos a este usuario.']);
         }
         if (getRoles()['rol_mesa']) {
-            $services = Service::where('status_service_id',2)->
+            $services = Service::where('status_service_id',1)->
             where('manager_id', Auth::user()->id)->paginate(15);
             return view('services/_index_pendiente', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de mesa de ayuda por lo tanto se muestran los servicios que haya levantado este usuario.']);
         }
         if (getRoles()['rol_tec']) {
-            $services = Service::where('status_service_id',2)->
+            $services = Service::where('status_service_id',1)->
             where('technical_id', Auth::user()->id)->paginate(15);
             return view('services/_index_pendiente', ['services' => $services, 'desc' => 'Este perfil cuenta con rol de técnico por lo tanto se muestran los servicios asignados a este usuario.']);
         }
-        $services = Service::where('status_service_id',2)->
+        $services = Service::where('status_service_id',1)->
         where('technical_id', 0)->paginate(15);
         return view('services/_index_pendiente', ['services' => $services, 'desc' => 'Este perfil no cuenta con ningun rol verifique con el administrador.']);
     }
