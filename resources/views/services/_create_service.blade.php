@@ -176,4 +176,5 @@
     </div>
 
 </div>
+@include('final_user.create_final_user_modal')
 @endsection
