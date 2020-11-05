@@ -145,6 +145,7 @@
                     <br>
                     {{ $service->service_type['service_type'] }}
                 </div>
+                <div class="col-md-12"><hr></div>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -167,6 +168,7 @@
                     {{ $service->usuario_Final['municipio'] }}
                     {{ $service->usuario_Final['estado'] }}
                 </div>
+                <div class="col-md-12"><hr></div>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -176,16 +178,17 @@
                     {{ $service->manager['last_name2'] }}
                 </div>
                 <div class="col-md-4">
-                    <label for="" class="font-weight-bold">Empleado asignado</label>
+                    <label for="" class="font-weight-bold">Técnico asignado</label>
                     <br>
                     {{ $service->technical['name'] }} {{ $service->technical['last_name1'] }}
                     {{ $service->technical['last_name2'] }}
                 </div>
                 <div class="col-md-4">
-                    <label for="" class="font-weight-bold">Fecha de asignación</label>
+                    <label for="" class="font-weight-bold">Fecha y hora de asignación</label>
                     <br>
                     {{ date_format(new \DateTime($service->schedule), 'd-m-Y g:i A') }}
                 </div>
+                <div class="col-md-12"><hr></div>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -207,6 +210,7 @@
                     <br>
                     {{ $service['observations'] }}
                 </div>
+                <div class="col-md-12"><hr></div>
             </div>
             <div class="row">
                 @if(!empty($service['firm']))
@@ -224,24 +228,34 @@
                 </div>
                 @endif
                 @if (getRoles()['rol_admin'] || getRoles()['rol_mesa'])
-                <div class="col-md-4">
+                    @if(!empty($service['payment']))
+                    <div class="col-md-4">
+                        <label for="" class="font-weight-bold">Método de pago</label>
+                        <br>
+                        {{ $service['payment'] }}
+                    </div>
+                    @else
+                    <div class="col-md-4">
                     <label for="" class="font-weight-bold">Método de pago</label>
-                    <br>
-                    {{ $service['payment'] }}
-                </div>
+                        <br>
+                        No definido aún
+                    </div>
+                    @endif
                 @endif
+                <div class="col-md-12"><hr></div>
             </div>
             <div class="row">
                 @if(!empty($service->init_service))
                 <div class="col-md-4">
-                    Servicio iniciado: {{ date_format(new \DateTime($service->init_service), 'd-m-Y g:i A') }}
+                    <label for="" class="font-weight-bold">Servicio iniciado:</label> {{ date_format(new \DateTime($service->init_service), 'd-m-Y g:i A') }}
                 </div>
                 @endif
                 @if(!empty($service->end_service))
                 <div class="col-md-4">
-                    Servicio finalizado: {{ date_format(new \DateTime($service->end_service), 'd-m-Y g:i A') }}
+                    <label for="" class="font-weight-bold">Servicio finalizado:</label> {{ date_format(new \DateTime($service->end_service), 'd-m-Y g:i A') }}
                 </div>
                 @endif
+                <div class="col-md-12"><hr></div>
             </div>
             <div class="row">
                 <div class="col-md-12">
