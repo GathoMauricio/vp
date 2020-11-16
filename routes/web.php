@@ -4,9 +4,7 @@ Route::get('amongus', function(){ return view('amongus'); })->name('amongus');
 //Rutas de autenticación
 Auth::routes();
 //Rutas no autenticadas
-Route::get('/', function () {
-    return view('_index_pendiente');
-})->middleware('guest');
+Route::get('/', function(){ return view('_index'); })->name('/')->middleware('guest');
 //Rutas autenticadas
 Route::middleware(['check_login'])->group(function () {
 
