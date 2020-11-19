@@ -8,7 +8,7 @@
 @else
 <div class="container">
     <div class="row py-1">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-sort">
             <thead>
                 <tr>
                     <th scope="col">

@@ -12,6 +12,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
     <script src="{{ asset('js/dist/sweetalert.js') }}"></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,11 +21,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dist/sweetalert.css') }}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <!--Icons-->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
-    <!--AdSense Script-->
-    <script data-ad-client="ca-pub-4747161271433972" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body>

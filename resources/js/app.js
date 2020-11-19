@@ -71,8 +71,15 @@ document.addEventListener('DOMContentLoaded', function() {
 const { isEmpty } = require('lodash');
 
 require('./bootstrap');
+require('./data_table');
 
 $(document).ready(function(){
+    $(".table-sort").DataTable( {
+        deferRender:    true,
+        scrollY:        200,
+        scrollCollapse: true,
+        scroller:       true
+    } );
     getSepomex($("#txt_cp_sepomex").val());
     getCustomerAddress($('#txt_customer_adress_id').val());
     $("#contenedor_mensajes").animate({ scrollTop: $('#contenedor_mensajes').prop("scrollHeight")},0);
