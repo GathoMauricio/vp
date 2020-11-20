@@ -75,10 +75,10 @@ require('./data_table');
 
 $(document).ready(function(){
     $(".table-sort").DataTable( {
-        deferRender:    true,
-        scrollY:        200,
-        scrollCollapse: true,
-        scroller:       true
+        //deferRender:    true,
+        //scrollY:        200,
+        //scrollCollapse: true,
+        //scroller:       true
     } );
     getSepomex($("#txt_cp_sepomex").val());
     getCustomerAddress($('#txt_customer_adress_id').val());
