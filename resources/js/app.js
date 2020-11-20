@@ -73,7 +73,7 @@ const { isEmpty } = require('lodash');
 require('./bootstrap');
 require('./data_table');
 
-$(document).ready(function(){
+jQuery(function() {
     $(".table-sort").DataTable( {
         deferRender:    true,
         //scrollY:        200,
