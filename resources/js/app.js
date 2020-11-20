@@ -76,6 +76,8 @@ require('./data_table');
 jQuery(function() {
     $(".table-sort").DataTable( {
         deferRender:    true,
+        processing: true
+        //serverSide: true
         //scrollY:        200,
         //scrollCollapse: true,
         //scroller:       true
