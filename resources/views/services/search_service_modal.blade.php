@@ -47,8 +47,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <input type="hidden" id="ruta_cargar_usuario_final"
-                                value="{{ route('cargar_usuario_final') }}">
+                                
                                 <label class="font-weight-bold">Estatus</label>
                                 <select name="status_service_id" class="form-control">
                                     <option value>--Seleccione una opción--</option>
