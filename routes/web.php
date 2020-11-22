@@ -161,7 +161,8 @@ Route::middleware(['check_login'])->group(function () {
 
     //Cargar todos los pendientes desde menu
     Route::get('_index_pendiente','PendienteController@index_pendiente_menu')->name('_index_pendiente');
-
+    //Ajax ruta pendientes
+    Route::get('pendings','PendienteController@pendings')->name('pendings');
     //Obtener bitacora ajax
     Route::get('get_bitacora_ajax','BitacoraController@getBitacoraAjax')->name('get_bitacora_ajax');
 

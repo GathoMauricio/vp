@@ -8,6 +8,7 @@
 @else
 <div class="container">
     <div class="row py-1">
+        <input type="hidden" value="{{ route('pendings') }}" id="txt_pendings_route">
         <table class="table table-bordered table-sort">
             <thead>
                 <tr>
@@ -43,6 +44,7 @@
                     </th>
                 </tr>
             </thead>
+        <!--
             @foreach($services as $service)
             <tbody>
                 <tr>
@@ -79,6 +81,7 @@
                 </tr>
             </tbody>
             @endforeach
+        -->
         </table>
     </div>
 </div>
